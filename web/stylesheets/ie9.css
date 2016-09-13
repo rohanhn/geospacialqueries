@@ -1,0 +1,58 @@
+
+/* CSS Document */
+
+#header_div
+{
+    height:100px;
+    background:url(/images/banner.png) no-repeat scroll 0 0;
+    width:100%;
+}
+#main_nav
+{
+    width: 350px;
+}
+#header_l{
+    width:700px;
+}
+#form_timpt{
+    margin-bottom:8px;
+}
+#list_taxi{
+    margin-left:-1px;
+}
+.taxi_popup{
+    height:190px;
+    width:231px;
+}
+.infobox{
+    background:url(../images/popup.png) no-repeat;
+    height:182px;
+}
+#timkiemxe{
+    width:190px;
+}
+#loaitimkiem{
+    width:190px;
+}
+.left_panel_search_btn img{
+    margin-left:-4px;
+}
+#user_area{
+
+}
+#leftpanel_search_button{
+
+}
+#refresh_list{
+    margin-right: 0px;
+}
+#insideFrm{
+    margin-left: 0px;
+    margin-top: 32px;
+}
+#loaitimkiem{
+    width: 93px;
+}
+#left_panel_heading{
+    width: 195px;
+}

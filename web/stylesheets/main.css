@@ -1,0 +1,943 @@
+
+<!--
+* {
+    margin: 0px;
+    padding: 0px;
+}
+body {
+    font-size: 11px;
+    /*	font-family: Tahoma, Verdana, Geneva, sans-serif;*/
+    font-family:Arial, Helvetica, sans-serif;
+    Filter: none;
+}
+/* #page_container{
+        width:100%;
+        margin:0px auto;
+        padding:0px;
+} */
+#page_container{
+    width:100%;
+    margin:0px auto;
+    padding:0px;
+}
+#header_div,#footer
+{
+    width:100%;
+    w\idth:100%;
+    float:left;
+}
+#header_div
+{
+    height:100px;
+    background:url(/images/banner.png) no-repeat scroll 0 0;
+    width:100%;
+}
+#blank
+{
+    width:40%;
+    height:73px;
+    clear: none;
+    float: left;
+}
+#header_l
+{
+    float:left;	
+    width:700px;
+    padding-top:72px;
+}
+.banner_ct
+{
+    width:793px;
+    float:left;
+}
+.header_r
+{
+    float:left;
+    /* 	position:absolute; */
+    margin-top:20px;
+    margin-left:15px;
+    width: 260px;
+}
+#main_nav
+{
+    text-align: center;
+    float: right;
+}
+#map{
+    width:100%;
+    margin-top:1px !important;
+    height:500px;
+    border:1px solid #AAAAAA;
+    float:left;
+
+}
+#holder{
+    width:998px;
+    margin-top:5px !important;
+    min-height:500px;
+    border:1px solid #AAAAAA;
+    float:left;
+}
+.search_tab
+{
+    width:100%;
+    height:18px;
+    font-style:normal;
+    font-variant:normal;
+    overflow:hidden;
+    position:relative;
+    text-align:left;
+}
+.search_tab a, label{
+    text-decoration: none;
+    color: #FFF;
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 7px;
+    font-family:Arial, Helvetica, sans-serif;
+}
+#searchTextField{
+    float: left;
+    margin-right: 5px;
+    height: 24px;
+}
+#searchButton{
+    float: left;
+}
+#searchButton img{
+    width: 24px;
+    heigth: 24px;
+}
+.search_tab .active{
+    text-decoration: underline;
+    color:#78C0FF;
+}
+.fl
+{
+    float:left;
+}
+.blank_tab
+{
+    width:25px;
+}
+.menu_L_active
+{
+    background:#F4F5F6 url(../Images/bt_left.gif) no-repeat scroll 0 0;
+    height:26px;
+    width:5px;
+    font-size: 1px;
+}
+.menu_L_deactive
+{
+    background:#F4F5F6 url(../Images/bt_left.gif) no-repeat scroll 0 3px;
+    height:26px;
+    width:5px;
+    font-size:1px;
+}
+.menu_R_active
+{
+    background:#F4F5F6 url(../Images/bt_right.gif) no-repeat scroll 0 0;
+    height:26px;
+    width:5px;
+    font-size:1px;
+}
+.menu_R_deactive
+{
+    background:#F4F5F6 url(../Images/bt_right.gif) no-repeat scroll 0 3px;
+    height:26px;
+    width:5px;
+    font-size:1px;
+}
+.menu_C_active
+{
+    height:26px;
+    background-attachment: scroll;
+    background-color: #B9EEB9;
+    background-image: url(../Images/bt_center.gif);
+    background-repeat: repeat-x;
+    background-position: 0 0;
+    color: #FFF;
+    font-weight:bold;
+    cursor:pointer;
+    padding: 5px;
+}
+.menu_C_deactive
+{
+    height:26px;
+    padding: 5px;
+    background-attachment: scroll;
+    background-color:#FFF;
+    background-image: url(../Images/bt_center.gif);
+    background-repeat: repeat-x;
+    background-position: 0 3px;
+    color:#AEA;
+    font-weight:normal;
+}
+
+.div_search
+{
+    width:100%;
+    height:50px;
+    overflow:hidden;
+}
+#footer{
+    margin-top:1px;
+    height:46px;
+    width:100%;
+}
+
+.resultSearch
+{
+    position: absolute;
+    display: none;
+    border: 1px solid #151B54;
+    width: 230px;
+    height: 395px;
+    visibility:visible;
+    z-index:1022;
+}
+.popupresutlPanel
+{
+    background:	#FFFFFF none repeat scroll 0 0;
+    overflow-x:hidden;
+    overflow-y:auto;
+    position:relative;
+}
+#searchresult .padding
+{
+    padding:0px 0px 20px 5px;
+}
+#centerDiv
+{
+    color:#333333;
+    padding:10px 0 0;
+}
+
+#Layer1 {
+    position:absolute;
+    left:403px;
+    top:8px;
+    width:201px;
+    height:183px;
+    z-index:1;
+}
+.divSearch-result{
+    -x-system-font: none;
+    color:#FFFFFF;
+    font-family:Arial, sans-serif;
+    font-size:11px;
+    font-size-adjust:none;
+    font-stretch:normal;
+    font-style:normal;
+    font-variant:normal;
+    text-decoration:none;
+    text-align:left;
+}
+.Main_Menu {
+    font-family:Arial, sans-serif;
+    font-size: 12px;
+    text-decoration:none;
+    font-weight:bold;
+    color:	#D7FFCE;
+    font-size-adjust:none;
+    margin-left:10px;
+}
+.topleftPanel
+{
+    background-color:#1589FF;
+    border-bottom:1px solid #FFFFFF;
+    width:100%;
+    font-size:11px;
+    overflow:auto;
+}
+.resultClose
+{
+    color:#FFFFFF;
+    float:left;
+    font-size:11px;
+    margin:3px 0 0 5px;
+    text-shadow:0 1px 0 #FFFFFF;
+    width:70%;
+    cursor:move;
+}
+.topleftPanel a
+{
+    color:#333333;
+    display:inline;
+    float:right;
+    text-shadow:0 1px 0 #FFFFFF;
+    cursor:pointer;
+    outline-style:none;
+    margin:3px 5px 0 0px;
+}
+.searchtitle
+{
+    display:block;
+    font-size:14px;
+    font-weight:bold;
+    margin:0 2px;
+    padding:0px 10px 5px 30px;
+    text-shadow:0 1px 0 #FFFFFF;
+}
+.radius
+{
+    border-bottom:1px solid #EFEFEF;
+    display:block;
+    font-size:12px;
+    margin:0 2px;
+    padding:0px 10px 5px 30px;
+}
+.resultItem
+{
+    border-bottom:1px #EFEFEF;
+    border-style:solid;
+    border-width:1px;
+    border-left:none;
+    float:left;
+    padding:3px 0 0px 10px;
+    position:relative;
+}
+
+.resultItem p {
+    float:left;
+    font-size:11px;
+    line-height:15px;
+    margin:7px 0 5px;
+    padding:0 5px 0 3px;
+    width:230px;
+}
+.resultItem .resultDetail {
+    display:block;
+    margin-bottom:3px;
+    padding-left:15px;
+}
+.resulttitle
+{
+    color:#333333;
+    font-size:13px;
+    cursor:pointer;
+    padding:15px;
+}
+.roadlist
+{
+    color:#333333;
+    font-size:11px;
+    line-height:18px;
+    margin:0 10px;
+}
+.roadlist li {
+    border-bottom:1px solid #EFEFEF;
+    cursor:pointer;
+    padding:3px 0 3px 0px;
+    position:relative;
+}
+.roadlist li a {
+    color:#333333;
+    left:0;
+    padding:0px;
+    position:absolute;
+    text-align:right
+}
+.roadname
+{
+    display:inline-block;
+    padding-left:16px;
+    font-weight:bold;
+}
+ol{
+    list-style:none outside none;
+    padding-left:10px;
+}
+.searchroad
+{
+    display:block;
+    font-size:14px;
+    font-weight:bold;
+    margin:0 2px;
+    padding:0px 10px 5px 20px;
+    text-shadow:0 1px 0 #FFFFFF;
+}
+.roadkeys
+{
+    border-bottom:1px solid #EFEFEF;
+    display:block;
+    font-size:12px;
+    margin:0 2px;
+    padding:0px 10px 5px 20px;
+}
+.roadlist-active {
+    -moz-box-shadow:0 -5px 0 #F5D362 inset, 0 -5px 35px #F5D362 inset, 0 3px 10px #F7E163 inset, 0 2px 8px rgba(200, 200, 200, 0.3);
+    background:-moz-linear-gradient(center top , #F7E163, #F5D362) repeat scroll 0 0 #F5D362;
+}
+.roadlist-hover {
+    background: #fff3b0 -webkit-gradient(linear, 0% 0%, 0% 90%, from(#fff9d7), to(#fff3b0));
+    background: #fff3b0 -moz-linear-gradient(center top, #fff9d7, #fff3b0);
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#fff9d7, endColorStr=#fff3b0);
+    box-shadow: 0 -5px 0px #fff3b0 inset, 0 -5px 35px #fff3b0 inset, 0 3px 10px #fff9d7 inset, 0 2px 8px rgba(200, 200, 200, 0.3);	
+    -moz-box-shadow: 0 -5px 0px #fff3b0 inset, 0 -5px 35px #fff3b0 inset, 0 3px 10px #fff9d7 inset, 0 2px 8px rgba(200, 200, 200, 0.3);
+}
+.titlebar
+{
+    color:#707070;
+    overflow:hidden;
+    padding:2px 0 0;
+    position:relative;
+}
+.titlebar .laixecolumn
+{
+    float:left;
+    margin-left:50px;
+    width:85%;
+    overflow:hidden;
+}
+.titlebar .soxecolumn
+{
+    float:left;
+    margin-left:20px;
+    overflow:hidden;
+    width:15%;
+}
+.vehiclelist
+{
+    color:#333333;
+    font-size:11px;
+    line-height:18px;
+    margin:20px 10px 10px 10px;
+}
+.vehiclelist li {
+    border-bottom:1px solid #EFEFEF;
+    cursor:pointer;
+    padding:3px 0 3px 0px;
+    position:relative;
+}
+.vehiclelist li a {
+    color:#333333;
+    left:0;
+    padding-left:10px;
+    position:absolute;
+    text-align:right
+}
+.vehiclename
+{
+    display:inline-block;
+    padding-left:45px;
+    font-weight:bold;
+}
+.vehiclelist .roadlist-active {
+    -moz-box-shadow:0 -5px 0 #F5D362 inset, 0 -5px 35px #F5D362 inset, 0 3px 10px #F7E163 inset, 0 2px 8px rgba(200, 200, 200, 0.3);
+    background:-moz-linear-gradient(center top , #F7E163, #F5D362) repeat scroll 0 0 #F5D362;
+}
+.vehiclelist .roadlist-hover {
+    background: #fff3b0 -webkit-gradient(linear, 0% 0%, 0% 90%, from(#fff9d7), to(#fff3b0));
+    background: #fff3b0 -moz-linear-gradient(center top, #fff9d7, #fff3b0);
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#fff9d7, endColorStr=#fff3b0);
+    box-shadow: 0 -5px 0px #fff3b0 inset, 0 -5px 35px #fff3b0 inset, 0 3px 10px #fff9d7 inset, 0 2px 8px rgba(200, 200, 200, 0.3);	
+    -moz-box-shadow: 0 -5px 0px #fff3b0 inset, 0 -5px 35px #fff3b0 inset, 0 3px 10px #fff9d7 inset, 0 2px 8px rgba(200, 200, 200, 0.3);
+}
+.resultItem-active {
+    width:100%;
+    border-bottom:1px #EFEFEF;
+    border-style:solid;
+    border-width:1px;
+    border-left:none;
+    float:left;
+    padding:3px 0 0px 10px;
+    position:relative;
+    -moz-box-shadow:0 -20px 50px #FFF3B0 inset, 0 2px 50px #FFF3B0 inset, 0 50px 100px #FFFDF2 inset, 0 2px 8px rgba(200, 200, 200, 0.3);
+    background:-moz-linear-gradient(center top , #FFFDF2, #FFF3B0) repeat scroll 0 0 #FFF3B0;
+}
+.resultItem-active .resultDetail{
+    display:block;
+    margin-bottom:3px;
+    padding-left:15px;
+}
+.divRpt{
+    width:300px;
+    float:left;
+}
+.linkDate{
+    padding-right:5px;
+}
+.linkDate a:hover{
+    text-decoration:underline;
+    cursor:pointer;
+}
+.bienso{
+    text-align:center;
+    width:134px;
+    float:left;
+    height:20px;
+}
+.colBienso{
+    width:50%;
+    float:left;
+    text-align:center;
+}
+.selectCar{
+    text-align:center;	
+    width:134px;
+    height:20px;
+    float:left;
+}
+.divBar{
+    float:left; 
+    width:100%;
+    padding-top:5px;
+    border-bottom:1px solid #666666;
+    padding-bottom:5px;
+}
+.listXe{
+    height:300px;
+    overflow-x:hidden;
+    float:left;
+    position:relative;
+    width:100%;
+    border-bottom:1px solid #333333;
+}
+
+
+#form_search{
+    float: left;
+    margin-top:5px;
+}
+.list_taxi_panel{
+    text-decoration:none;
+    color: #78C0FF;
+    font-weight:bold;
+}
+#list_taxi th{
+    color:#D7FFCE;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+}
+#list_taxi{
+    color:#FFFFFF;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Map */
+.awem3NBSPM {
+    BORDER-RIGHT: #0a9df5 1px solid; BORDER-TOP: #0a9df5 1px solid; FONT-WEIGHT: normal; FONT-SIZE: 12px; Z-INDEX: 1000; VISIBILITY: hidden; BORDER-LEFT: #0a9df5 1px solid; WIDTH: 170px; CURSOR: hand; COLOR: #ffffff; LINE-HEIGHT: 20px; BORDER-BOTTOM: #0a9df5 1px solid; FONT-STYLE: normal; FONT-FAMILY: arial,helvetica,verdana; POSITION: absolute; BACKGROUND-COLOR: #0a9df5
+}
+.awemnbspm {
+    PADDING-LEFT: 20px; TEXT-ALIGN: left
+}
+.cpYearNavigation, .cpMonthNavigation {
+    background-color:#C0C0C0;
+    color:#000000;
+    font-weight:bold;
+    text-align:center;
+    text-decoration:none;
+}
+.cpDayColumnHeader, .cpYearNavigation, .cpMonthNavigation, .cpCurrentMonthDate, .cpCurrentMonthDateDisabled, .cpOtherMonthDate, .cpOtherMonthDateDisabled, .cpCurrentDate, .cpCurrentDateDisabled, .cpTodayText, .cpTodayTextDisabled, .cpText {
+    font-family:arial;
+    font-size:8pt;
+}
+td.cpDayColumnHeader {
+    border-color:#C0C0C0;
+    border-style:solid;
+    border-width:0 0 1px;
+    text-align:right;
+}
+.cpCurrentMonthDate, .cpOtherMonthDate, .cpCurrentDate {
+    text-align:right;
+    text-decoration:none;
+}
+.cpCurrentMonthDateDisabled, .cpOtherMonthDateDisabled, .cpCurrentDateDisabled {
+    color:#D0D0D0;
+    text-align:right;
+    text-decoration:line-through;
+}
+.cpCurrentMonthDate, .cpCurrentDate {
+    color:#000000;
+}
+.cpOtherMonthDate {
+    color:#808080;
+}
+td.cpCurrentDate {
+    background-color:#C0C0C0;
+    border:thin solid #800000;
+    color:white;
+}
+td.cpCurrentDateDisabled {
+    border:thin solid #FFAAAA;
+}
+td.cpTodayText, td.cpTodayTextDisabled {
+    border-color:#C0C0C0;
+    border-style:solid;
+    border-width:1px 0 0;
+}
+a.cpTodayText, span.cpTodayTextDisabled {
+    height:20px;
+}
+a.cpTodayText {
+    color:black;
+}
+.cpTodayTextDisabled {
+    color:#D0D0D0;
+}
+.cpBorder {
+    border:thin solid #808080;
+}
+/* Map */
+
+/* Toggle Panel */
+#abc{
+    z-index: 10000000;
+}
+#toggleButton
+{
+    height: 20px;
+    width: 20px;
+    background-color: Red;
+    float: right;
+    margin: 10px;
+    cursor: pointer;
+}
+#toggleBtn
+{    
+    float: right;
+    padding: 5px;
+    left: -1px;
+}
+.toggle_close{
+    width: 20px;
+    height: 20px;
+    background: url('/images/back.ico');
+    background-repeat:no-repeat;
+    border: none;
+}
+.toggle_open{
+    width: 20px;
+    height: 20px;
+    background-image: url('/images/forward.ico');
+}
+#loaitimkiem{
+    width: 98px;
+    margin-top:5px;
+}
+#searchBy{
+    float: left;
+    margin-top: 7px;
+    width: 90px;
+    text-transform: uppercase;
+}
+/* Toggle Panel */
+
+/* List taxi*/
+#list_taxi{
+    width: 240px;
+
+}
+#list_taxi th{
+    font-size: 12px;
+    text-align: left;
+    padding-right: 5px;
+    text-transform:uppercase;
+}
+#sliderbox{
+    height: 500px; 
+    width: 250px; 
+    background-color: white; 
+    float: left;
+}
+.taxi_normal_row{
+    font-size: 11px;
+}
+.bold_row{
+    background-color: #3D9DE1;
+}
+#timkiemxe{
+    padding:0px;
+    width:195px;
+    height:25px;
+    margin-right:8px;
+    float:left;
+    font-size:12px;
+}
+#timxe{
+    height:25px;
+    border:1px solid #000000;
+}
+#left_panel_heading{
+    color: #78C0FF;
+    font-family: arial;
+    font-size:13px;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-left:0px;
+    text-transform: uppercase;
+    text-align: center;
+    width:215px;
+}
+#refresh_list{
+    float:right;
+    margin-top:5px;
+    margin-right:5px;
+}
+#refresh_list img{
+    width:24px;
+    height:24px;
+}
+.taxi_info_heading{
+    text-align:center;
+}
+.taxi_popup{
+    height:168px;
+}
+.flood_popup{
+    height:168px;
+}
+.trafficjam_popup{
+    height:105px;
+}
+.infobox{
+    background:url(../images/popup.png) no-repeat;
+}
+.flood_infobox{
+    background:url(../images/popup3.png) no-repeat;
+}
+.trafficjam_infobox{
+    background:url(../images/popup3.png) no-repeat;
+}
+.left_panel_search_btn img{
+    width: 24px;
+    height:24px;
+    margin-left:-2px;
+}
+.left_panel_search_btn{
+    cursor:pointer;
+}
+
+.page_navigation{
+    float: left;
+    margin-top: 5px;
+}
+.page_navigation a{
+    font-weight:normal;
+    padding: 2px;
+    /* border: 1px solid white; */
+    margin: 2px 2px 2px 0;
+    color: #D7FFCE;
+    text-decoration: none;
+    font-family: Arial;
+}
+.page_navigation .active_page{
+    background: none repeat scroll 0 0 #000;
+    color: #78C0FF;
+}
+/* List taxi*/
+
+/*Autocomplete*/
+.autocomplete-w1 { 
+    background:url(img/shadow.png) no-repeat bottom right; 
+    position:absolute; 
+    top:0px; 
+    left:0px; 
+    margin:6px 0 0 6px; 
+    font-size:12px;
+    /* IE6 fix: */ _background:none; _margin:1px 0 0 0; 
+}
+.autocomplete { 
+    border:1px solid #000000; 
+    background:#FFF; 
+    cursor:default; 
+    text-align:left; 
+    max-height:350px; 
+    overflow:auto; 
+    margin:-6px 6px 6px -6px; 
+    /* IE6 specific: */ _height:350px;  _margin:0; _overflow-x:hidden; 
+}
+.autocomplete .selected { 
+    background:#F0F0F0; 
+}
+.autocomplete div { 
+    padding:2px 5px; 
+    white-space:nowrap; 
+    overflow:hidden; 
+}
+.autocomplete strong { 
+    font-weight: bold; 
+    color:#3399FF; 
+}
+
+/*Autocomplete*/
+
+/*Form xem h�nh tr�nh*/
+#table_baocao{
+    /*width: 190px;
+    height: 60px;*/
+}
+.txt_baocao_inputtime{
+    width: 38px;
+    margin-right: 5px;
+}
+.txt_baocao_inputdate{
+    width: 71px;
+}
+.div_baocao_inputtime{
+    float: left;
+}
+#div_baocao_left{
+    float: left;
+    margin-left: -3px;
+}
+#div_baocao_right{
+    float: left;
+}
+#cbo_baocao_chonphuongtien{
+    height: 22px;
+    margin-right: 5px;
+    width: 113px;
+}
+#btn_baocao_submitbaocao{
+    width:116px;
+}
+/*Form xem h�nh tr�nh*/
+
+/*info window*/
+.infobox_tbl{
+
+}
+.taxi_info_window{
+    background-color:#000000;
+    color:#78C0FF;
+}
+.infobox_title{
+    font-size: 12px;
+    color:#78C0FF;	
+}
+.firstCol{
+    text-align: right;
+}
+.infobox_content{
+    color:#FFFFFF;
+    font-weight:bold;
+    font-size: 12px;
+}
+/*info window*/
+
+/* � User - Logout*/
+#user_area{
+    width: 150px; 
+    position: absolute; 
+    left: 80px; bottom: 3px; 
+    height: 24px; 
+    line-heigth: 24px; font-family: arial; font-size: 13px; font-weight: bold;
+}
+/* � User - Logout*/
+
+#logout img{
+    width: 24px;
+    height: 24px;
+}
+
+/* sos window */
+#sosPopup{
+    background-color: #000;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+#sosPopup h1{
+    color: #78C0FF;
+    font-size: 15px;
+    font-family: Arial;	
+}
+#sosPopup div{
+    background-color: #000;
+    color: #fff;
+
+}
+#sosPopup a{
+    color: #fff;
+    text-decoration: none;
+}
+#alertPopup a{
+    color: #fff;
+    text-decoration: none;
+}
+#alertPopup h1{
+    color: #78C0FF;
+    font-size: 15px;
+    font-family: Arial;
+}
+#alertPopup{
+    background-color: #000;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+/* sos window */
+
+
+/*Form Bao cao*/
+#table_report{
+    width: 120px;
+    height: 55px;
+}
+.txt_report_inputtime{
+    width: 38px;
+    margin-right: 5px;
+}
+.txt_report_inputdate{
+    width: 71px;
+}
+.div_report_inputtime{
+    float: left;
+}
+#div_report_left{
+    float: left;
+    margin-left: -3px;
+}
+#div_report_right{
+    float: left;
+    width: 143px;
+}
+#cbo_report_vehicleselect{
+    height: 22px;
+    margin-right: 5px;
+    width: 114px;
+    float: left;
+    margin-top: 5px;
+}
+#cbo_report_reporttype{
+    height: 22px;	
+    width: 143px;
+}
+#btn_trackreport_submitreport{
+    float: left;
+    margin-top: 5px;
+}
+#btn_trackreport_submitreport img{
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+}
+/*Form Bao cao*/
+
+/* CSS cho ri�ng Chrome */
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+    #cbo_baocao_chonphuongtien{margin-top:2px;}
+    #btn_baocao_submitbaocao{margin-top:3px; height: 25px;}
+    #searchTextField{width: 233px;}
+    #cbo_report_reporttype{
+        margin-top:2px;
+    }
+    #search_tab a{
+        margin-right: 6px;
+    }
+    #cbo_report_vehicleselect{
+        margin-top:8px;
+    }   
+
+}
+
+
+/* @media screen and (-webkit-min-device-pixel-ratio:0) { 
+ #btn_baocao_submitbaocao{margin-top:3px; height: 25px;} 
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+ #searchTextField{width: 163px;} 
+} */
+/* CSS cho ri�ng Chrome */
+

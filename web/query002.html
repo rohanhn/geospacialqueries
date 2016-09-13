@@ -1,0 +1,106 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>LBS in Cloud</title>
+</head>
+<link rel="stylesheet" href="css/style.css" type="text/css">
+
+<script language="javascript" src='admin/script/jquery-1.6.min.js'></script>
+<script language="javascript" src='admin/script/ajax.util.js'></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places,geometry" type="text/javascript"></script> -->
+<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS0NJ3YISAxR4uBqBp7Ze7H44i_wywJn4&libraries=places,geometry"
+	type="text/javascript"></script>
+<script language="javascript" src='script/main_query.js'></script>
+<script type="text/javascript" src="script/init_query.js"></script>
+
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="script/slick_dtp.js"></script>
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="css/slick_dtp.css">
+<script>
+$(function() {
+
+	var slickDTP = new SlickDTP();
+	
+	$( "#starttime" ).click(function() {
+		slickDTP.pickDate('#starttime','');
+	});
+	
+	$( "#endtime" ).click(function() {
+		slickDTP.pickDate('#endtime','');
+	});
+});//end ready
+</script>
+
+
+<body onLoad="Init()">
+	<div id="main">
+		<h1>Chuyên đề 02</h1>
+		<div id="leftPanel">
+			<div id="main_nav">
+				<table width="100%" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<p style="color: #fff">
+								<b>Truy vấn: </b> "Tìm tất cả các xe của hãng Taxi ABC đi qua
+								đường Nguyễn Chí Thanh, Hà Nội từ lúc 11:00 – 12:00, vào ngày
+								2/8/2016?"
+							</p>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="searchToolbar">
+				<table width="100%">
+					<tr>
+						<td width="70%">
+							<table style="width: 100%">
+								<tr>
+									<td style="width: 40%">Tên đường (phố)</td>
+									<td style="width: 60%"><input type="text" id="street"
+										size="23" value="Nguyễn Chí Thanh"></td>
+								</tr>
+								<tr>
+									<td>Thời gian bắt đầu</td>
+									<td><input type="text" id="starttime" size="23"></td>
+								</tr>
+								<tr>
+									<td>Thời gian kết thúc</td>
+									<td><input type="text" id="endtime" size="23"></td>
+								</tr>
+							</table>
+						</td>
+
+						<td width="30%">
+							<table>
+								<tr>
+									<td style="border-width: 0px"><input type="button"
+										id="searchButton"
+										style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
+										size="15" onClick="query002()" value="Tìm kiếm"></td>
+								</tr>
+								<tr>
+									<td style="border-width: 0px"><input type="button"
+										style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
+										size="15" onClick="reloadPage()" value="Reload"></td>
+								</tr>
+
+							</table>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div id="txtResultBox">
+				<b>KẾT QUẢ</b>
+			</div>
+			<div id="resultBox" style="height: 230px; overflow: auto"></div>
+		</div>
+		<div id="rightPanel">
+			<div id="map_canvas"></div>
+		</div>
+	</div>
+</body>
+</html>

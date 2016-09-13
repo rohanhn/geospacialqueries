@@ -1,0 +1,95 @@
+/* CSS Document */
+#main
+{
+	width:100%;	
+	text-align:center;	
+}
+
+#leftPanel
+{
+	width:30%;
+	height: 500px;
+	float:left;
+}
+#main_nav
+{
+	background-color:#11428b;	
+	padding-top:5px;
+
+}
+#searchToolbar
+{
+
+}
+#query001{
+	display:none;
+}
+#query002{
+	display:none;
+}
+#query003{
+	display:none;
+}
+#query004{
+	display:none;
+}
+#query005{
+	display:none;
+}
+#query006{
+	display:none;
+}
+#query007{
+	display:none;
+}
+#searchTextInput
+{
+	color:#CC0066;		
+}
+#searchOpt1
+{
+	padding-left:50px;	
+	text-align: left;
+}
+#txtResultBox
+{
+    background-color: #11428B;
+    height: 45px;
+    padding-top: 15px;
+	text-align:left;
+	padding-left:25px;
+	color:#CCFFFF;
+
+	
+}
+#resultBox
+{
+	text-align:left;
+	
+}
+#rightPanel
+{
+	width:70%;
+	float:right;
+	
+}
+#map_canvas
+{
+	width: 888px;
+	height: 500px;
+	margin:0 auto;	
+}
+td, th
+{
+border:1px solid black;
+}
+h1
+{
+	color:#11428b;
+}
+.Main_Menu
+{
+	color:#CCFFFF;
+	text-decoration:none;
+	
+}

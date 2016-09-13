@@ -1,0 +1,21 @@
+/*info window*/
+.taxi_info_window{
+    background-color:#000000;
+    color:#78C0FF;
+}
+.infobox_title{
+}
+.infobox_content{
+    color:#FFFFFF;
+    font-weight:bold;
+}
+.taxi_info_heading{
+    text-align:center;
+} 
+.taxi_popup{
+    height:168px;
+}
+.infobox{
+    background:url(../images/popup.png) no-repeat;
+}
+/*info window*/

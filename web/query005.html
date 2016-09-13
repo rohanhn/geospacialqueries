@@ -1,0 +1,95 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>LBS in Cloud</title>
+</head>
+<link rel="stylesheet" href="css/style.css" type="text/css">
+
+<script language="javascript" src='admin/script/jquery-1.6.min.js'></script>
+<script language="javascript" src='admin/script/ajax.util.js'></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places,geometry" type="text/javascript"></script> -->
+<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS0NJ3YISAxR4uBqBp7Ze7H44i_wywJn4&libraries=places,geometry"
+	type="text/javascript"></script>
+<script language="javascript" src='script/main_query.js'></script>
+<script type="text/javascript" src="script/init_query.js"></script>
+<body onLoad="Init()">
+	<div id="main">
+		<h1>Chuyên đề 02</h1>
+		<div id="leftPanel">
+			<div id="main_nav">
+				<table width="100%" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr>
+							<p style="color: #fff">
+								<b>Truy vấn: </b> "Khoảng 30 phút nữa tính từ thời điểm hiện
+								tại, tìm và dự đoán xe tải/taxi NÀO GẦN VỚI địa điểm A nhất ?"
+							</p>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="searchToolbar">
+				<table style="width: 100%">
+					<tr>
+						<td>
+							<table>
+								<tr style="width: 100%">
+									<td style="width: 30%">Vị trí</td>
+									<td><input type="text" id="position" size="30"
+										value="Click chuột phải vào bản đồ để lấy tọa độ"></td>
+								</tr>
+								<tr>
+									<td>Thời gian</td>
+									<td><input type="text" id="time" size="30"> </td>
+								</tr>
+							</table>
+						</td>
+						<td style="width: 28%">
+							<table style="width: 100%">
+								<tr>
+									<td style="border-width: 0px"><input type="button"
+										id="searchButton"
+										style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
+										size="15" onClick="query005()" value="Tìm kiếm"></td>
+								</tr>
+								<tr>
+									<td style="border-width: 0px"><input type="button"
+										style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
+										size="15" onClick="reloadPage()" value="Reload"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+
+				<table width="100%" style="display: none">
+					<tr>
+						<td style="width: 20%">Khoảng cách</td>
+						<td><input type="radio" name="distance" value="500">500
+							m <br /> <input type="radio" name="distance" value="1000"
+							checked="checked">1000 m <br /> <input type="radio"
+							name="distance" value="3000">3000 m <br /></td>
+
+					</tr>
+					<tr style="display: none">
+						<td>Nguồn dữ liệu</td>
+						<td><input type="radio" name="source" value="1">
+							Gooogle<br /> <input type="radio" name="source" value="2"
+							checked="checked"> Database<br /> <input type="radio"
+							name="source" value="3"> All<br /></td>
+					</tr>
+				</table>
+
+			</div>
+			<div id="txtResultBox">
+				<b>KẾT QUẢ</b>
+			</div>
+			<div id="resultBox" style="height: 230px; overflow: auto"></div>
+		</div>
+		<div id="rightPanel">
+			<div id="map_canvas"></div>
+		</div>
+	</div>
+</body>
+</html>

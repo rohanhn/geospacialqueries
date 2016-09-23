@@ -29,18 +29,15 @@ public class GetAllVehicles extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String dataResponse = CommonLib.request("http://panavcs.appspot.com/", "vehicle", null);
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet GetAllVehicles</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet GetAllVehicles at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            if (dataResponse.length() > 0) {
+                out.println(dataResponse);
+            } else {
+                out.println("no data");
+            }
         }
     }
 

@@ -1,5 +1,5 @@
 # geospacialqueries
-Intallation:
+Installation:
 - Download source code from GitHub
 - Using Netbean IDE to open this project
 - Build code from Netbean IDE

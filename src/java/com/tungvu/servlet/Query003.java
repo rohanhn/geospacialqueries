@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tungvu;
+package com.tungvu.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author TungVu
  */
-public class GetAllVehicles extends HttpServlet {
+public class Query003 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,15 +29,18 @@ public class GetAllVehicles extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String dataResponse = CommonLib.request("http://panavcs.appspot.com/", "vehicle", null);
-
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            if (dataResponse.length() > 0) {
-                out.println(dataResponse);
-            } else {
-                out.println("no data");
-            }
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Querry003</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Querry003 at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

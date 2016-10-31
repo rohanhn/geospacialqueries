@@ -2,32 +2,32 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>GetAllVehicles</servlet-name>
-        <servlet-class>com.tungvu.GetAllVehicles</servlet-class>
+        <servlet-class>com.tungvu.servlet.GetAllVehicles</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Query001</servlet-name>
-        <servlet-class>com.tungvu.Query001</servlet-class>
+        <servlet-class>com.tungvu.servlet.Query001</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Query002</servlet-name>
-        <servlet-class>com.tungvu.Query002</servlet-class>
+        <servlet-class>com.tungvu.servlet.Query002</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Query003</servlet-name>
-        <servlet-class>com.tungvu.Query003</servlet-class>
+        <servlet-class>com.tungvu.servlet.Query003</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Query004</servlet-name>
-        <servlet-class>com.tungvu.Query004</servlet-class>
+        <servlet-class>com.tungvu.servlet.Query004</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Query005</servlet-name>
-        <servlet-class>com.tungvu.Query005</servlet-class>
+        <servlet-class>com.tungvu.servlet.Query005</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Query006</servlet-name>
-        <servlet-class>com.tungvu.Query006</servlet-class>
-    </servlet>    
+        <servlet-class>com.tungvu.servlet.Query006</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GetAllVehicles</servlet-name>
         <url-pattern>/getalls</url-pattern>
@@ -56,7 +56,6 @@
         <servlet-name>Query006</servlet-name>
         <url-pattern>/query006</url-pattern>
     </servlet-mapping>
-    
     <session-config>
         <session-timeout>
             30

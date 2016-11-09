@@ -27,6 +27,14 @@
     <servlet>
         <servlet-name>Query006</servlet-name>
         <servlet-class>com.tungvu.servlet.Query006</servlet-class>
+        <init-param>
+            <param-name>start_point</param-name>
+            <param-value>value</param-value>
+        </init-param>
+        <init-param>
+            <param-name>distance</param-name>
+            <param-value>value</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>GetAllVehicles</servlet-name>

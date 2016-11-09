@@ -31,10 +31,12 @@ public class Query006 extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        // secondo query
-        SecondoQuery.secondoQuery();
+        // get data
+        String startPoint = request.getParameter("start_point");
+        String distance = request.getParameter("distance");
         
+        // secondo query
+        //SecondoQuery.secondoQuery();
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");

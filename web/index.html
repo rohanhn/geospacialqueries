@@ -1,6 +1,6 @@
 <head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<title>LBS in Cloud</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>LBS in Cloud</title>
 </head>
 <link rel="stylesheet" href="css/style.css" type="text/css">
 
@@ -8,470 +8,408 @@
 <script language="javascript" src='admin/script/ajax.util.js'></script>
 <!-- <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places,geometry" type="text/javascript"></script> -->
 <script async defer
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS0NJ3YISAxR4uBqBp7Ze7H44i_wywJn4&libraries=places,geometry"
-	type="text/javascript"></script>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS0NJ3YISAxR4uBqBp7Ze7H44i_wywJn4&libraries=places,geometry"
+type="text/javascript"></script>
 <script language="javascript" src='script/main_query.js'></script>
 <script type="text/javascript" src="script/init_query.js"></script>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="script/slick_dtp.js"></script>
 <link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+      href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="css/slick_dtp.css">
 <script>
-$(function() {
+    $(function () {
 
-	var slickDTP = new SlickDTP();
-	
-	$( "#starttime" ).click(function() {
-		slickDTP.pickDate('#starttime','');
-	});
-	
-	$( "#endtime" ).click(function() {
-		slickDTP.pickDate('#endtime','');
-	});
-});//end ready
+        var slickDTP = new SlickDTP();
+
+        $("#starttime").click(function () {
+            slickDTP.pickDate('#starttime', '');
+        });
+
+        $("#endtime").click(function () {
+            slickDTP.pickDate('#endtime', '');
+        });
+    });//end ready
 </script>
 
 <body onLoad="Init()">
-	<div id="main">
-		<h1>Chuyên đề 02</h1>
-		<div id="leftPanel">
-			<div
-				style="background-color: #ee32c0; padding-top: 5px; padding-bottom: 5px">
-				<table>
-					<tr>
-						<td style="border-width: 0; width: 0%">Chọn mẫu truy vấn</td>
-						<td style="border-width: 0; width: 60%"><select
-							id="select_pattern" onchange="showpattern()">
-								<option value="1">Mẫu pattern 1</option>
-								<option value="2">Mẫu pattern 2</option>
-								<option value="3">Mẫu pattern 3</option>
-								<option value="4">Mẫu pattern 4</option>
-								<option value="5">Mẫu pattern 5</option>
-								<option value="6">Mẫu pattern 6</option>
-								<option value="7">Mẫu pattern 7</option>
-						</select></td>
-					</tr>
-				</table>
-			</div>
+    <div id="main">
+        <h1>Chuyên đề 02</h1>
+        <div id="leftPanel">
+            <div
+                style="background-color: #ee32c0; padding-top: 5px; padding-bottom: 5px">
+                <table>
+                    <tr>
+                        <td style="border-width: 0; width: 0%">Chọn mẫu truy vấn</td>
+                        <td style="border-width: 0; width: 60%"><select
+                                id="select_pattern" onchange="showpattern()">
+                                <option value="1">Mẫu pattern 1</option>
+                                <option value="2">Mẫu pattern 2</option>
+                                <option value="3">Mẫu pattern 3</option>
+                                <option value="4">Mẫu pattern 4</option>
+                                <option value="5">Mẫu pattern 5</option>
+                                <option value="6">Mẫu pattern 6</option>
 
-			<div id="query001">
-				<div id="main_nav">
-					<table width="100%" cellpadding="0" cellspacing="0">
-						<tbody>
-							<tr>
-								<p style="color: #fff">
-									<b>Truy vấn: </b> "Tìm và hiển thị tất cả các xe tải/taxi cách
-									địa điểm A bán kính cho trước" – tại thời điểm hiện tại
-								</p>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<table width="100%">
-					<tr>
-						<td style="width: 20%">Vị trí</td>
-						<td><input type="text" id="position" size="40"
-							value="Click chuột phải vào bản đồ để lấy tọa độ"></td>
-					</tr>
-					<tr>
-						<td>Hãng xe</td>
-						<!-- <td><input type="text" id="searchTextInput" size="40"> -->
-						<td><select id="searchTextInput">
-								<option value="mai linh">Taxi Mai Linh</option>
-								<option value="abc">Taxi ABC</option>
-								<option value="thanh nga">Taxi Thanh Nga</option>
-								<option value="taxi">Tất cả</option>
-						</select></td>
-					</tr>
-				</table>
-				<table width="100%">
-					<tr>
-						<td style="width: 70%">
-							<table style="width: 100%">
-								<tr>
-									<td width="35%">Khoảng cách</td>
-									<td width="60%"><input type="radio" name="distance"
-										value="500">500 m <br /> <input type="radio"
-										name="distance" value="1000" checked="checked">1000 m
-										<br /> <input type="radio" name="distance" value="3000">3000
-										m <br /></td>
-								</tr>
-								<tr style="display: none">
-									<td>Nguồn dữ liệu</td>
-									<td><input type="radio" name="source" value="1">
-										Gooogle<br /> <input type="radio" name="source" value="2"
-										checked="checked"> Database<br /> <input type="radio"
-										name="source" value="3"> All<br /></td>
-								</tr>
-							</table>
-						</td>
-						<td width="30%">
-							<table>
-								<tr>
-									<td style="border-width: 0px"><input type="button"
-										id="searchButton"
-										style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
-										size="15" onClick="query001()" value="Tìm kiếm">
-								</tr>
-								<tr>
-									<td style="border-width: 0px"><input type="button"
-										style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
-										size="15" onClick="reloadPage()" value="Reload"></td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-				</table>
-			</div>
-			<div id="query002">
-				<div id="main_nav">
-					<table width="100%" cellpadding="0" cellspacing="0">
-						<tbody>
-							<tr>
-								<p style="color: #fff">
-									<b>Truy vấn: </b> "Tìm tất cả các xe của hãng Taxi ABC đi qua
-									đường Nguyễn Chí Thanh, Hà Nội từ lúc 11:00 – 12:00, vào ngày
-									2/8/2016?"
-								</p>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<table width="100%">
-					<tr>
-						<td width="70%">
-							<table style="width: 100%">
-								<tr>
-									<td style="width: 40%">Tên đường (phố)</td>
-									<td style="width: 60%"><input type="text" id="street"
-										size="23" value="Nguyễn Chí Thanh"></td>
-								</tr>
-								<tr>
-									<td>Thời gian bắt đầu</td>
-									<td><input type="text" id="starttime" size="23"></td>
-								</tr>
-								<tr>
-									<td>Thời gian kết thúc</td>
-									<td><input type="text" id="endtime" size="23"></td>
-								</tr>
-							</table>
-						</td>
+                            </select></td>
+                    </tr>
+                </table>
+            </div>
 
-						<td width="30%">
-							<table>
-								<tr>
-									<td style="border-width: 0px"><input type="button"
-										id="searchButton"
-										style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
-										size="15" onClick="query002()" value="Tìm kiếm"></td>
-								</tr>
-								<tr>
-									<td style="border-width: 0px"><input type="button"
-										style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
-										size="15" onClick="reloadPage()" value="Reload"></td>
-								</tr>
+            <div id="query001">
+                <div id="main_nav">
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                        <p style="color: #fff">
+                            <b>Truy vấn: </b> "Tìm và hiển thị tất cả các xe tải/taxi cách
+                            địa điểm A bán kính cho trước" – tại thời điểm hiện tại
+                        </p>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <table width="100%">
+                    <tr>
+                        <td style="width: 20%">Vị trí</td>
+                        <td><input type="text" id="position" size="40"
+                                   value="Click chuột phải vào bản đồ để lấy tọa độ"></td>
+                    </tr>
+                    <tr>
+                        <td>Hãng xe</td>
+                        <!-- <td><input type="text" id="searchTextInput" size="40"> -->
+                        <td><select id="searchTextInput">
+                                <option value="mai linh">Taxi Mai Linh</option>
+                                <option value="abc">Taxi ABC</option>
+                                <option value="thanh nga">Taxi Thanh Nga</option>
+                                <option value="taxi">Tất cả</option>
+                            </select></td>
+                    </tr>
+                </table>
+                <table width="100%">
+                    <tr>
+                        <td style="width: 70%">
+                            <table style="width: 100%">
+                                <tr>
+                                    <td width="35%">Khoảng cách</td>
+                                    <td width="60%"><input type="radio" name="distance"
+                                                           value="500">500 m <br /> <input type="radio"
+                                                           name="distance" value="1000" checked="checked">1000 m
+                                        <br /> <input type="radio" name="distance" value="3000">3000
+                                        m <br /></td>
+                                </tr>
+                                <tr style="display: none">
+                                    <td>Nguồn dữ liệu</td>
+                                    <td><input type="radio" name="source" value="1">
+                                        Gooogle<br /> <input type="radio" name="source" value="2"
+                                                             checked="checked"> Database<br /> <input type="radio"
+                                                             name="source" value="3"> All<br /></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td width="30%">
+                            <table>
+                                <tr>
+                                    <td style="border-width: 0px"><input type="button"
+                                                                         id="searchButton"
+                                                                         style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
+                                                                         size="15" onClick="query001()" value="Tìm kiếm">
+                                </tr>
+                                <tr>
+                                    <td style="border-width: 0px"><input type="button"
+                                                                         style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
+                                                                         size="15" onClick="reloadPage()" value="Reload"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="query002">
+                <div id="main_nav">
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                        <p style="color: #fff">
+                            <b>Truy vấn: </b> "Tìm tất cả các xe của hãng Taxi ABC đi qua
+                            đường Nguyễn Chí Thanh, Hà Nội từ lúc 11:00 – 12:00, vào ngày
+                            2/8/2016?"
+                        </p>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <table width="100%">
+                    <tr>
+                        <td width="70%">
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="width: 40%">Tên đường (phố)</td>
+                                    <td style="width: 60%"><input type="text" id="street"
+                                                                  size="23" value="Nguyễn Chí Thanh"></td>
+                                </tr>
+                                <tr>
+                                    <td>Thời gian bắt đầu</td>
+                                    <td><input type="text" id="starttime" size="23"></td>
+                                </tr>
+                                <tr>
+                                    <td>Thời gian kết thúc</td>
+                                    <td><input type="text" id="endtime" size="23"></td>
+                                </tr>
+                            </table>
+                        </td>
 
-							</table>
-						</td>
-					</tr>
-				</table>
-			</div>
-			<div id="query003">
-				<div id="main_nav">
-					<table width="100%" cellpadding="0" cellspacing="0">
-						<tbody>
-							<tr>
-								<p style="color: #fff">
-									<b>Truy vấn: </b> "Ở thời điểm hiện tại, Phố (ví dụ, hạn chế
-									1km chiều dài) nào đang có số lượng xe ô tô >= 100 chiếc?"
-								</p>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<table width="100%">
-					<tr>
-						<td width="70%">
-							<table style="width: 100%">
-								<tr>
-									<td style="width: 35%">Số lượng xe</td>
-									<td style="width: 65%"><select id="number_of_vehicles">
-											<option value="10">10 xe</option>
-											<option value="50">50 xe</option>
-											<option value="100">100 xe</option>
-											<option value="200">200</option>
-									</select></td>
-								</tr>
-								<tr>
-									<td>Độ dài phố</td>
-									<td><input type="radio" name="distance" value="500">500
-										m <br /> <input type="radio" name="distance" value="1000"
-										checked="checked">1000 m <br /> <input type="radio"
-										name="distance" value="3000">3000 m <br /></td>
-								</tr>
-							</table>
-						</td>
-						<td width="30%">
-							<table>
-								<tr>
-									<td style="border-width: 0px"><input type="button"
-										id="searchButton"
-										style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
-										size="15" onClick="query003()" value="Tìm kiếm">
-								</tr>
-								<tr>
-									<td style="border-width: 0px"><input type="button"
-										style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
-										size="15" onClick="reloadPage()" value="Reload"></td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-				</table>
-			</div>
-			<div id="query004">
-				<div id="main_nav">
-					<table width="100%" cellpadding="0" cellspacing="0">
-						<tbody>
-							<tr>
-								<p style="color: #fff">
-									<b>Truy vấn: </b> "Khoảng 30 phút nữa tính từ thời điểm hiện
-									tại, tìm và dự đoán tất cả các xe tải/taxi cách địa điểm A bán
-									kính 500 m?"
-								</p>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<table width="100%">
-					<tr>
-						<td style="width: 20%">Vị trí</td>
-						<td><input type="text" id="position_query004" size="40"
-							value="Click chuột phải vào bản đồ để lấy tọa độ"></td>
-					</tr>
-					<tr>
-						<td>Thời gian</td>
-						<td><input type="text" id="time_query004" size="40"> phút.</td>
-					</tr>
-				</table>
-				<table width="100%">
-					<tr>
-						<td style="width: 20%">Khoảng cách</td>
-						<td><input type="radio" name="distance_query004" value="500">500
-							m <br /> <input type="radio" name="distance_query004" value="1000"
-							checked="checked">1000 m <br /> <input type="radio"
-							name="distance_query004" value="3000">3000 m <br /></td>
-						<td style="width: 36%">
-							<table style="width: 100%">
-								<tr>
-									<td style="border-width: 0px"><input type="button"
-										id="searchButton"
-										style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
-										size="15" onClick="main_query004()" value="Tìm kiếm"></td>
-								</tr>
-								<tr>
-									<td style="border-width: 0px"><input type="button"
-										style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
-										size="15" onClick="reloadPage()" value="Reload"></td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-					<tr style="display: none">
-						<td>Nguồn dữ liệu</td>
-						<td><input type="radio" name="source" value="1">
-							Gooogle<br /> <input type="radio" name="source" value="2"
-							checked="checked"> Database<br /> <input type="radio"
-							name="source" value="3"> All<br /></td>
-					</tr>
-				</table>
-			</div>
-			<div id="query005">
-				<div id="main_nav">
-					<table width="100%" cellpadding="0" cellspacing="0">
-						<tbody>
-							<tr>
-								<p style="color: #fff">
-									<b>Truy vấn: </b> "Khoảng 30 phút nữa tính từ thời điểm hiện
-									tại, tìm và dự đoán xe tải/taxi NÀO GẦN VỚI địa điểm A nhất ?"
-								</p>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<table style="width: 100%">
-					<tr>
-						<td>
-							<table>
-								<tr style="width: 100%">
-									<td style="width: 30%">Vị trí</td>
-									<td><input type="text" id="position_query005" size="30"
-										value="Click chuột phải vào bản đồ để lấy tọa độ"></td>
-								</tr>
-								<tr>
-									<td>Thời gian</td>
-									<td><input type="text" id="time_query005" size="30"></td>
-								</tr>
-							</table>
-						</td>
-						<td style="width: 28%">
-							<table style="width: 100%">
-								<tr>
-									<td style="border-width: 0px"><input type="button"
-										id="searchButton"
-										style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
-										size="15" onClick="main_query005()" value="Tìm kiếm"></td>
-								</tr>
-								<tr>
-									<td style="border-width: 0px"><input type="button"
-										style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
-										size="15" onClick="reloadPage()" value="Reload"></td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-				</table>
+                        <td width="30%">
+                            <table>
+                                <tr>
+                                    <td style="border-width: 0px"><input type="button"
+                                                                         id="searchButton"
+                                                                         style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
+                                                                         size="15" onClick="query002()" value="Tìm kiếm"></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-width: 0px"><input type="button"
+                                                                         style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
+                                                                         size="15" onClick="reloadPage()" value="Reload"></td>
+                                </tr>
 
-				<table width="100%" style="display: none">
-					<tr>
-						<td style="width: 20%">Khoảng cách</td>
-						<td><input type="radio" name="distance" value="500">500
-							m <br /> <input type="radio" name="distance" value="1000"
-							checked="checked">1000 m <br /> <input type="radio"
-							name="distance" value="3000">3000 m <br /></td>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="query003">
+                <div id="main_nav">
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                        <p style="color: #fff">
+                            <b>Truy vấn: </b> "Ở thời điểm hiện tại, Phố (ví dụ, hạn chế
+                            1km chiều dài) nào đang có số lượng xe ô tô >= 100 chiếc?"
+                        </p>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <table width="100%">
+                    <tr>
+                        <td width="70%">
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="width: 35%">Số lượng xe</td>
+                                    <td style="width: 65%"><select id="number_of_vehicles">
+                                            <option value="10">10 xe</option>
+                                            <option value="50">50 xe</option>
+                                            <option value="100">100 xe</option>
+                                            <option value="200">200</option>
+                                        </select></td>
+                                </tr>
+                                <tr>
+                                    <td>Độ dài phố</td>
+                                    <td><input type="radio" name="distance" value="500">500
+                                        m <br /> <input type="radio" name="distance" value="1000"
+                                                        checked="checked">1000 m <br /> <input type="radio"
+                                                        name="distance" value="3000">3000 m <br /></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td width="30%">
+                            <table>
+                                <tr>
+                                    <td style="border-width: 0px"><input type="button"
+                                                                         id="searchButton"
+                                                                         style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
+                                                                         size="15" onClick="query003()" value="Tìm kiếm">
+                                </tr>
+                                <tr>
+                                    <td style="border-width: 0px"><input type="button"
+                                                                         style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
+                                                                         size="15" onClick="reloadPage()" value="Reload"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="query004">
+                <div id="main_nav">
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                        <p style="color: #fff">
+                            <b>Truy vấn: </b> "Khoảng 30 phút nữa tính từ thời điểm hiện
+                            tại, tìm và dự đoán tất cả các xe tải/taxi cách địa điểm A bán
+                            kính 500 m?"
+                        </p>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <table width="100%">
+                    <tr>
+                        <td style="width: 20%">Vị trí</td>
+                        <td><input type="text" id="position_query004" size="40"
+                                   value="Click chuột phải vào bản đồ để lấy tọa độ"></td>
+                    </tr>
+                    <tr>
+                        <td>Thời gian</td>
+                        <td><input type="text" id="time_query004" size="40"> phút.</td>
+                    </tr>
+                </table>
+                <table width="100%">
+                    <tr>
+                        <td style="width: 20%">Khoảng cách</td>
+                        <td><input type="radio" name="distance_query004" value="500">500
+                            m <br /> <input type="radio" name="distance_query004" value="1000"
+                                            checked="checked">1000 m <br /> <input type="radio"
+                                            name="distance_query004" value="3000">3000 m <br /></td>
+                        <td style="width: 36%">
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="border-width: 0px"><input type="button"
+                                                                         id="searchButton"
+                                                                         style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
+                                                                         size="15" onClick="main_query004()" value="Tìm kiếm"></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-width: 0px"><input type="button"
+                                                                         style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
+                                                                         size="15" onClick="reloadPage()" value="Reload"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr style="display: none">
+                        <td>Nguồn dữ liệu</td>
+                        <td><input type="radio" name="source" value="1">
+                            Gooogle<br /> <input type="radio" name="source" value="2"
+                                                 checked="checked"> Database<br /> <input type="radio"
+                                                 name="source" value="3"> All<br /></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="query005">
+                <div id="main_nav">
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                        <p style="color: #fff">
+                            <b>Truy vấn: </b> "Khoảng 30 phút nữa tính từ thời điểm hiện
+                            tại, tìm và dự đoán xe tải/taxi NÀO GẦN VỚI địa điểm A nhất ?"
+                        </p>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <table style="width: 100%">
+                    <tr>
+                        <td>
+                            <table>
+                                <tr style="width: 100%">
+                                    <td style="width: 30%">Vị trí</td>
+                                    <td><input type="text" id="position_query005" size="30"
+                                               value="Click chuột phải vào bản đồ để lấy tọa độ"></td>
+                                </tr>
+                                <tr>
+                                    <td>Thời gian</td>
+                                    <td><input type="text" id="time_query005" size="30"></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 28%">
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="border-width: 0px"><input type="button"
+                                                                         id="searchButton"
+                                                                         style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
+                                                                         size="15" onClick="main_query005()" value="Tìm kiếm"></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-width: 0px"><input type="button"
+                                                                         style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
+                                                                         size="15" onClick="reloadPage()" value="Reload"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
 
-					</tr>
-					<tr style="display: none">
-						<td>Nguồn dữ liệu</td>
-						<td><input type="radio" name="source" value="1">
-							Gooogle<br /> <input type="radio" name="source" value="2"
-							checked="checked"> Database<br /> <input type="radio"
-							name="source" value="3"> All<br /></td>
-					</tr>
-				</table>
-			</div>
-			<div id="query006">
-				<div id="main_nav">
-					<table width="100%" cellpadding="0" cellspacing="0">
-						<tbody>
-							<tr>
-								<p style="color: #fff">
-									<b>Truy vấn: </b> o "Tìm tất cả các chuyến bay từ Sao Paulo dài
-									hơn 4000 km." Hay “Tìm tất cả các xe xuất phát từ Hải Phòng và
-									lộ trình đi sẽ dài hơn 300 km?”
-								</p>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<table width="100%">
-					<tr>
-						<td width="70%"><table>
-								<tr>
-									<td style="width: 35%">Điểm xuất phát</td>
-									<td style="width: 65%"><input type="text" id="position_query006"
-										size="27" value="Click vào bản đồ để lấy tọa độ"></td>
-								</tr>
-								<tr>
-									<td width="35%">Lộ trình</td>
-									<td width="60%"><input type="radio" name="distance_query006"
-										value="100">100 km <br /> <input type="radio"
-										name="distance_query006" value="500" checked="checked">500 km <br />
-										<input type="radio" name="distance_query006" value="1000">1000
-										km <br /></td>
-								</tr>
-							</table></td>
-						<td width="30%">
-							<table>
-								<tr>
-									<td style="border-width: 0px"><input type="button"
-										id="searchButton"
-										style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
-										size="15" onClick="main_query006()" value="Tìm kiếm"></td>
-								</tr>
-								<tr>
-									<td style="border-width: 0px"><input type="button"
-										style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
-										size="15" onClick="reloadPage()" value="Reload"></td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-				</table>
-			</div>
-			<div id="query007">
-				<div id="main_nav">
-					<table width="100%" cellpadding="0" cellspacing="0">
-						<tbody>
-							<tr>
-								<p style="color: #fff">
-									<b>Truy vấn: </b> o "Lấy bất kỳ cặp máy bay mà trong chuyến bay
-									của họ đến gần hơn với nhau hơn 500 mét! " hay “Biết lộ trình
-									của 2 xe A, B: tìm thời điểm trong tương lai, mà lúc đó 2 xe có
-									khoảng cách gần nhất? Trả về thời gian, địa điểm, và khoảng
-									cách dự đoán?”
-								</p>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<table width="100%">
-					<tr>
-						<td style="width: 35%">Vị trí</td>
-						<td style="width: 65%"><input type="text" id="position"
-							size="40"></td>
-					</tr>
-					<tr>
-						<td>Thông tin</td>
-						<td><input type="text" id="searchTextInput" size="40">
-						</td>
-					</tr>
-				</table>
-				<table width="100%">
-					<tr>
-						<td style="width: 70%">
-							<table style="width: 100%">
-								<tr>
-									<td width="35%">Khoảng cách</td>
-									<td width="60%"><input type="radio" name="distance"
-										value="500">500 m <br /> <input type="radio"
-										name="distance" value="1000" checked="checked">1000 m
-										<br /> <input type="radio" name="distance" value="3000">3000
-										m <br /></td>
-								</tr>
-								<tr style="display: none">
-									<td>Nguồn dữ liệu</td>
-									<td><input type="radio" name="source" value="1">
-										Gooogle<br /> <input type="radio" name="source" value="2"
-										checked="checked"> Database<br /> <input type="radio"
-										name="source" value="3"> All<br /></td>
-								</tr>
-							</table>
-						</td>
-						<td width="30%">
-							<table>
-								<tr>
-									<td style="border-width: 0px"><input type="button"
-										id="searchButton"
-										style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
-										size="15" onClick="SearchTextMap()" value="Tìm kiếm">
-									</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-				</table>
-			</div>
-			<div id="txtResultBox">
-				<b>KẾT QUẢ</b>
-			</div>
-			<div id="resultBox" style="height: 230px; overflow: auto"></div>
-		</div>
-		<div id="rightPanel">
-			<div id="map_canvas"></div>
-		</div>
-	</div>
+                <table width="100%" style="display: none">
+                    <tr>
+                        <td style="width: 20%">Khoảng cách</td>
+                        <td><input type="radio" name="distance" value="500">500
+                            m <br /> <input type="radio" name="distance" value="1000"
+                                            checked="checked">1000 m <br /> <input type="radio"
+                                            name="distance" value="3000">3000 m <br /></td>
+
+                    </tr>
+                    <tr style="display: none">
+                        <td>Nguồn dữ liệu</td>
+                        <td><input type="radio" name="source" value="1">
+                            Gooogle<br /> <input type="radio" name="source" value="2"
+                                                 checked="checked"> Database<br /> <input type="radio"
+                                                 name="source" value="3"> All<br /></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="query006">
+                <div id="main_nav">
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                        <p style="color: #fff">
+                            <b>Truy vấn: </b> o "Tìm tất cả các chuyến bay từ Sao Paulo dài
+                            hơn 4000 km." Hay “Tìm tất cả các xe xuất phát từ Hải Phòng và
+                            lộ trình đi sẽ dài hơn 300 km?”
+                        </p>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <table width="100%">
+                    <tr>
+                        <td width="70%"><table>
+                                <tr>
+                                    <td style="width: 35%">Điểm xuất phát</td>
+                                    <td style="width: 65%"><input type="text" id="position_query006"
+                                                                  size="27" value="Click vào bản đồ để lấy tọa độ"></td>
+                                </tr>
+                                <tr>
+                                    <td width="35%">Lộ trình</td>
+                                    <td width="60%"><input type="radio" name="distance_query006"
+                                                           value="100">100 km <br /> <input type="radio"
+                                                           name="distance_query006" value="500" checked="checked">500 km <br />
+                                        <input type="radio" name="distance_query006" value="1000">1000
+                                        km <br /></td>
+                                </tr>
+                            </table></td>
+                        <td width="30%">
+                            <table>
+                                <tr>
+                                    <td style="border-width: 0px"><input type="button"
+                                                                         id="searchButton"
+                                                                         style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
+                                                                         size="15" onClick="main_query006()" value="Tìm kiếm"></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-width: 0px"><input type="button"
+                                                                         style="width: 100px; height: 30px; margin-left: 12px; margin-right: auto"
+                                                                         size="15" onClick="reloadPage()" value="Reload"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="txtResultBox">
+                <b>KẾT QUẢ</b>
+            </div>
+            <div id="resultBox" style="height: 230px; overflow: auto"></div>
+        </div>
+        <div id="rightPanel">
+            <div id="map_canvas"></div>
+        </div>
+    </div>
 </body>
 </html>

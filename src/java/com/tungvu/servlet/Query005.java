@@ -5,8 +5,13 @@
  */
 package com.tungvu.servlet;
 
+import com.tungvu.libs.Trips;
+import com.tungvu.secondo.SecondoQuery;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,18 +34,30 @@ public class Query005 extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Querry005</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Querry005 at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+
+            List<Trips> mResult = SecondoQuery.query005();
+            String responseString = "";
+            if (mResult.size() > 0) {
+                responseString = "{\"data\": [";
+                for (int i = 0; i < mResult.size(); i++) {
+                    String node = "{\"lon\" : \"" + mResult.get(i).getLongitude()
+                            + "\", \"lat\" : \"" + mResult.get(i).getLatitude()
+                            + "\", \"time\" : \"" + mResult.get(i).getUTC()
+                            + "\"},";
+                    responseString = responseString + node;
+                }
+                responseString = responseString.substring(0, responseString.length() - 1) + "]}";
+            }
+
+            try (PrintWriter out = response.getWriter()) {
+                /* TODO output your page here. You may use following sample code. */
+                out.println(responseString);
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(Query006.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

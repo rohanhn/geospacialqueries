@@ -537,91 +537,58 @@ function main_query004() {
 }
 
 function query005() {
-    // get input
-    var Latlon = document.getElementById("position").value;
-    var time = document.getElementById("time").value;
-
     map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
     var resettxtResult = document.getElementById("resultBox").innerHTML;
     resettxtResult = "";
     document.getElementById("resultBox").innerHTML = resettxtResult;
-    var TempLatlon = new Array();
-    TempLatlon = Latlon.split(",");
-    var TempLat = parseFloat(TempLatlon[0]);
-    var TempLon = parseFloat(TempLatlon[1]);
 
-    // truy van
-    if (time.length > 0) {
-        // Toa do diem tim kiem
-        var LatLon = new google.maps.LatLng(TempLat, TempLon);
+    // truy van tu Secondo
+    var response = requestHTML("/GeoSpacialQuerries/query005");
+    var report_data = convertResponseDataToObj(response);
+    var txtResult = document.getElementById("resultBox").innerHTML;
+    txtResult = txtResult + "<table style=\"width:100%\">";
+    for (var i = 0; i < report_data.length; i++) {
+        var TempLat = parseFloat(report_data[i].lat);
+        var TempLon = parseFloat(report_data[i].lon);
 
-        // Hien thi vi tri hien tai tren ban do
-        var image = 'images/people_32.png';
-        var beachMarker = new google.maps.Marker({
-            position: LatLon,
-            map: map,
-            icon: image
-        });
+        // alert(d);
+        txtResult = txtResult + "<tr bgcolor=\"#8fbafa\">";
+        txtResult = txtResult + "<td style=\"width:55%\">"
+                + "Time: " + report_data[i].time + "</td>";
 
-        // Hien thi vung gioi han
-        var cityCircle;
-        var CircleOptions = {
-            strokeColor: "#99F",
-            strokeOpacity: 0.8,
-            strokeWeight: 1,
-            fillColor: "#99F",
-            fillOpacity: 0.35,
-            map: map,
-            center: LatLon,
-            radius: distance
-        };
-        cityCircle = new google.maps.Circle(CircleOptions);
-        // Cap nhat center cua map
-        map.setCenter(LatLon);
+        txtResult = txtResult + "</td></tr>";
+        createMarker2(TempLat, TempLon, "Time: " + report_data[i].time);
 
-        // truy van tu Secondo
-        var response = requestHTML("/GeoSpacialQuerries/getalls");
-        var report_data = convertResponseDataToObj(response);
-        var txtResult = document.getElementById("resultBox").innerHTML;
-        txtResult = txtResult + "<table style=\"width:100%\">";
-        for (var i = 0; i < report_data.length; i++) {
-            var TempLatAtm = parseFloat(report_data[i].lat);
-            var TempLonAtm = parseFloat(report_data[i].lon);
-            var AtmAdress = report_data[i].xLaixeHoten;
-            var d = Distance(TempLat, TempLon, TempLatAtm, TempLonAtm);
-            // kiem tra khoang cach thoa man dieu kien
-            if (d <= 1000) {
-                // alert(d);
-                txtResult = txtResult + "<tr bgcolor=\"#8fbafa\">";
-                txtResult = txtResult + "<td style=\"width:55%\">"
-                        + report_data[i].xBienso + "-"
-                        + report_data[i].xCompanyName + "</td>";
-                txtResult = txtResult
-                        + "<td style=\"width:15%\"><img src=\"/images/btn.png\" style=\"width:30px; padding:5px \" onclick=\"GetDirection("
-                        + TempLat + "," + TempLon + "," + TempLatAtm
-                        + "," + TempLonAtm + ")\"/>";
-                txtResult = txtResult + "</td></tr>";
-                bankAdd = report_data[i].xBienso + "-"
-                        + report_data[i].xCompanyName;
-                createMarker2(TempLatAtm, TempLonAtm, bankAdd);
-            }
-        }
-        txtResult = txtResult + "</table>";
-        document.getElementById("resultBox").innerHTML = txtResult;
-
-        // hien thi ket qua truy van secondo
-
-        // rightclick event
-        google.maps.event.addListener(map, "rightclick", function (event) {
-            var lat = event.latLng.lat();
-            var lng = event.latLng.lng();
-            var position = document.getElementById("position");
-            position.value = lat + "," + lng;
-        });
-    } else {
-        alert("Chưa nhập đủ dữ liệu!");
     }
+    txtResult = txtResult + "</table>";
+    document.getElementById("resultBox").innerHTML = txtResult;
 
+    // hien thi ket qua truy van secondo
+    // Toa do diem tim kiem
+    var LatLon = new google.maps.LatLng(parseFloat(report_data[0].lat), parseFloat(report_data[0].lon));
+    // Hien thi vung gioi han
+    var cityCircle;
+    var CircleOptions = {
+        strokeColor: "#99F",
+        strokeOpacity: 0.8,
+        strokeWeight: 1,
+        fillColor: "#99F",
+        fillOpacity: 0.35,
+        map: map,
+        center: LatLon,
+        radius: distance
+    };
+    cityCircle = new google.maps.Circle(CircleOptions);
+    // Cap nhat center cua map
+    map.setCenter(LatLon);
+
+    // rightclick event
+    google.maps.event.addListener(map, "rightclick", function (event) {
+        var lat = event.latLng.lat();
+        var lng = event.latLng.lng();
+        var position = document.getElementById("position");
+        position.value = lat + "," + lng;
+    });
 }
 
 function main_query005() {
@@ -714,98 +681,59 @@ function main_query005() {
 }
 
 function query006() {
-    // get input
-    var Latlon = document.getElementById("position").value;
-    var KhoangCach = getRadioValue("distance");
-    alert(Latlon);
-    alert(KhoangCach);
-
     map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
     var resettxtResult = document.getElementById("resultBox").innerHTML;
     resettxtResult = "";
     document.getElementById("resultBox").innerHTML = resettxtResult;
-    var TempLatlon = new Array();
-    TempLatlon = Latlon.split(",");
-    var TempLat = parseFloat(TempLatlon[0]);
-    var TempLon = parseFloat(TempLatlon[1]);
 
-    // truy van
-    if (KhoangCach.length > 0) {
-        // truy van tu Secondo
-        var response = requestHTML("/GeoSpacialQuerries/query006?start_point=" + Latlon + "&&distance=" + KhoangCach);
-        var report_data = convertResponseDataToObj(response);
+    // truy van tu Secondo
+    var response = requestHTML("/GeoSpacialQuerries/query006");
+    var report_data = convertResponseDataToObj(response);
+    var txtResult = document.getElementById("resultBox").innerHTML;
+    txtResult = txtResult + "<table style=\"width:100%\">";
+    for (var i = 0; i < report_data.length; i++) {
+        var TempLat = parseFloat(report_data[i].lat);
+        var TempLon = parseFloat(report_data[i].lon);
 
+        // alert(d);
+        txtResult = txtResult + "<tr bgcolor=\"#8fbafa\">";
+        txtResult = txtResult + "<td style=\"width:55%\">"
+                + "Thời gian dự kiến: " + report_data[i].time + "</td>";
 
+        txtResult = txtResult + "</td></tr>";
+        createMarker2(TempLat, TempLon, "Thời gian dự kiến: " + report_data[i].time);
 
-//        // Toa do diem tim kiem
-//        var LatLon = new google.maps.LatLng(TempLat, TempLon);
-//
-//        // Hien thi vi tri hien tai tren ban do
-//        var image = 'images/people_32.png';
-//        var beachMarker = new google.maps.Marker({
-//            position: LatLon,
-//            map: map,
-//            icon: image
-//        });
-//
-//        // Hien thi vung gioi han
-//        var cityCircle;
-//        var CircleOptions = {
-//            strokeColor: "#99F",
-//            strokeOpacity: 0.8,
-//            strokeWeight: 1,
-//            fillColor: "#99F",
-//            fillOpacity: 0.35,
-//            map: map,
-//            center: LatLon,
-//            radius: distance
-//        };
-//        cityCircle = new google.maps.Circle(CircleOptions);
-//        // Cap nhat center cua map
-//        map.setCenter(LatLon);
-//
-//        // truy van tu Secondo
-//        var response = requestHTML("/GeoSpacialQuerries/getalls");
-//        var report_data = convertResponseDataToObj(response);
-//        var txtResult = document.getElementById("resultBox").innerHTML;
-//        txtResult = txtResult + "<table style=\"width:100%\">";
-//        for (var i = 0; i < report_data.length; i++) {
-//            var TempLatAtm = parseFloat(report_data[i].lat);
-//            var TempLonAtm = parseFloat(report_data[i].lon);
-//            var AtmAdress = report_data[i].xLaixeHoten;
-//            var d = Distance(TempLat, TempLon, TempLatAtm, TempLonAtm);
-//            // kiem tra khoang cach thoa man dieu kien
-//            if (d <= 1000) {
-//                // alert(d);
-//                txtResult = txtResult + "<tr bgcolor=\"#8fbafa\">";
-//                txtResult = txtResult + "<td style=\"width:55%\">"
-//                        + report_data[i].xBienso + "-"
-//                        + report_data[i].xCompanyName + "</td>";
-//                txtResult = txtResult
-//                        + "<td style=\"width:15%\"><img src=\"/images/btn.png\" style=\"width:30px; padding:5px \" onclick=\"GetDirection("
-//                        + TempLat + "," + TempLon + "," + TempLatAtm
-//                        + "," + TempLonAtm + ")\"/>";
-//                txtResult = txtResult + "</td></tr>";
-//                bankAdd = report_data[i].xBienso + "-"
-//                        + report_data[i].xCompanyName;
-//                createMarker2(TempLatAtm, TempLonAtm, bankAdd);
-//            }
-//        }
-//        txtResult = txtResult + "</table>";
-//        document.getElementById("resultBox").innerHTML = txtResult;
-//
-//        // hien thi ket qua truy van secondo
-//
-//        // rightclick event
-//        google.maps.event.addListener(map, "rightclick", function (event) {
-//            var lat = event.latLng.lat();
-//            var lng = event.latLng.lng();
-//            var position = document.getElementById("position");
-//            position.value = lat + "," + lng;
-//        });
-    } else {
-        alert("Chưa nhập đủ dữ liệu!");
     }
+    txtResult = txtResult + "</table>";
+    document.getElementById("resultBox").innerHTML = txtResult;
+
+    // hien thi ket qua truy van secondo
+    // Toa do diem tim kiem
+    var LatLon = new google.maps.LatLng(parseFloat(report_data[0].lat), parseFloat(report_data[0].lon));
+    // Hien thi vung gioi han
+    var cityCircle;
+    var CircleOptions = {
+        strokeColor: "#99F",
+        strokeOpacity: 0.8,
+        strokeWeight: 1,
+        fillColor: "#99F",
+        fillOpacity: 0.35,
+        map: map,
+        center: LatLon,
+        radius: distance
+    };
+    cityCircle = new google.maps.Circle(CircleOptions);
+    // Cap nhat center cua map
+    map.setCenter(LatLon);
+
+    // rightclick event
+    google.maps.event.addListener(map, "rightclick", function (event) {
+        var lat = event.latLng.lat();
+        var lng = event.latLng.lng();
+        var position = document.getElementById("position");
+        position.value = lat + "," + lng;
+    });
+
 
 }
 

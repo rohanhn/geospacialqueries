@@ -73,7 +73,7 @@ public class SecondoQuery {
             query = "query Trips";
             SecondoInterface.secondo(query,
                     resultList, errorCode, errorPos, errorMessage);
-            mTrips = CommonLib.parseTripsFromString(resultList.toString());
+            mTrips = CommonLibForSecondo.parseTripsFromString(resultList.toString());
 
             //
             if (errorCode.value != 0) {
@@ -135,7 +135,7 @@ public class SecondoQuery {
                     query = "query Stops";
                     SecondoInterface.secondo(query,
                             resultList, errorCode, errorPos, errorMessage);
-                    queryResult = CommonLib.parseTripsFromString(resultList.toString());
+                    queryResult = CommonLibForSecondo.parseTripsFromString(resultList.toString());
                     break;
                 default:
                     break;
@@ -187,7 +187,7 @@ public class SecondoQuery {
             query = "query Trips";
             SecondoInterface.secondo(query,
                     resultList, errorCode, errorPos, errorMessage);
-            queryResult = CommonLib.parseTripsFromString(resultList.toString());
+            queryResult = CommonLibForSecondo.parseTripsFromString(resultList.toString());
 
             //
             if (errorCode.value != 0) {
@@ -235,7 +235,7 @@ public class SecondoQuery {
             query = "query Stops";
             SecondoInterface.secondo(query,
                     resultList, errorCode, errorPos, errorMessage);
-            queryResult = CommonLib.parseTripsFromString(resultList.toString());
+            queryResult = CommonLibForSecondo.parseTripsFromString(resultList.toString());
 
             //
             if (errorCode.value != 0) {

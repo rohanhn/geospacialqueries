@@ -5,6 +5,7 @@
  */
 package com.tungvu.servlet;
 
+import com.tungvu.libs.Parameters;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author TungVu
  */
-public class GetAllVehicles extends HttpServlet {
+public class Getdata extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,15 +30,14 @@ public class GetAllVehicles extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String dataResponse = CommonLibForServlet.request("http://panavcs.appspot.com/", "vehicle", null);
-
+        String state = request.getParameter("status");
+        synchronized (Parameters.GET_DATA_STATE) {
+            Parameters.GET_DATA_STATE = state;
+        }
+        CommonLibForServlet.getdata(state);
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            if (dataResponse.length() > 0) {
-                out.println(dataResponse);
-            } else {
-                out.println("no data");
-            }
+
         }
     }
 

@@ -1,0 +1,2087 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://gps.binhanh.com.vn/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://gps.binhanh.com.vn/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://gps.binhanh.com.vn/">
+      <s:element name="GetVehicleInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="xnCode" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVehicleInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetVehicleInfoResult" type="tns:BAVehicle" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BAVehicle">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MessageResult" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Vehicles" type="tns:ArrayOfVehicle" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfVehicle">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Vehicle" nillable="true" type="tns:Vehicle" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Vehicle">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VehiclePlate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UTCTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LocalTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Latitude" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Longitude" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Speed" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="State" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Direction" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="APIAuthenticationHeader" type="tns:APIAuthenticationHeader" />
+      <s:complexType name="APIAuthenticationHeader">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="XNCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="GetVehicleInfoWithAddress">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="xnCode" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVehicleInfoWithAddressResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetVehicleInfoWithAddressResult" type="tns:BAVehicle" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataKm">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="xnCode" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="vehiclePlate" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="toDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataKmResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDataKmResult" type="tns:BADataKm" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BADataKm">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MessageResult" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalKm" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetVehicleInfoByCompanyID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="companyID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVehicleInfoByCompanyIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetVehicleInfoByCompanyIDResult" type="tns:BAVehicle" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVehicleInfoDetailByCompanyID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="companyID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="plates" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVehicleInfoDetailByCompanyIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetVehicleInfoDetailByCompanyIDResult" type="tns:BAVehicle" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVehicleOnlineByCompanyID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="companyID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVehicleOnlineByCompanyIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetVehicleOnlineByCompanyIDResult" type="tns:BAVehicle" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVehicleLocationByCompanyID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="companyID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="vehiclePlate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="time" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetVehicleLocationByCompanyIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetVehicleLocationByCompanyIDResult" type="tns:BAVehicle" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataKmByCompanyID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="companyID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="vehiclePlate" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="toDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDataKmByCompanyIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDataKmByCompanyIDResult" type="tns:BADataKm" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRouteByCompanyID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="companyID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="vehiclePlate" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="toDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRouteByCompanyIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRouteByCompanyIDResult" type="tns:BADataRoute" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BADataRoute">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MessageResult" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Routes" type="tns:ArrayOfBARoute" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfBARoute">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BARoute" nillable="true" type="tns:BARoute" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BARoute">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UTCTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LocalTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Latitude" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Longitude" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Speed" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Kmgps" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StateData" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetRouteByCompanyIDWithAddress">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="companyID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="vehiclePlate" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="toDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRouteByCompanyIDWithAddressResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRouteByCompanyIDWithAddressResult" type="tns:BADataRoute" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRouteByCompanyIDWithAddressNew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="companyID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="vehiclePlate" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="toDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRouteByCompanyIDWithAddressNewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRouteByCompanyIDWithAddressNewResult" type="tns:BADataRoute" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllActivityDetail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="xnCode" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="toDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="vehiclePlates" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="isGroupKm" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="minTime" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllActivityDetailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllActivityDetailResult" type="tns:BADataReportActivityDetail" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BADataReportActivityDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MessageResult" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorType" type="tns:HongPhuErrorType" />
+          <s:element minOccurs="0" maxOccurs="1" name="BAReportActivityDetails" type="tns:ArrayOfBAReportActivityDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="HongPhuErrorType">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="AccessDenied" />
+          <s:enumeration value="ErrorDateTime" />
+          <s:enumeration value="InvalidVehicle" />
+          <s:enumeration value="ErrorInProcessing" />
+          <s:enumeration value="NoEndAddress" />
+          <s:enumeration value="NoStartAddress" />
+          <s:enumeration value="NoAddress" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfBAReportActivityDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BAReportActivityDetail" nillable="true" type="tns:BAReportActivityDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BAReportActivityDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VehicleTypeName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehiclePlate" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReportDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalTime" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="KmGPS" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="KmOfPulseMechanical" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="ConstantNorms" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Norms" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartBuilding" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartRoad" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartCommune" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartDistrict" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartProvince" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EndBuilding" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EndRoad" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EndCommune" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EndDistrict" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EndProvince" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAllBgtReportSpeedOver">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="xnCode" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="toDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="vehiclePlates" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllBgtReportSpeedOverResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllBgtReportSpeedOverResult" type="tns:BADataBgtReportSpeedOver" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BADataBgtReportSpeedOver">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MessageResult" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorType" type="tns:BAServiceErrorType" />
+          <s:element minOccurs="0" maxOccurs="1" name="BABgtReportSpeedOvers" type="tns:ArrayOfBgtReportSpeedOver" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="BAServiceErrorType">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="AccessDenied" />
+          <s:enumeration value="ErrorDateTime" />
+          <s:enumeration value="InvalidVehicle" />
+          <s:enumeration value="ErrorInProcessing" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfBgtReportSpeedOver">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BgtReportSpeedOver" nillable="true" type="tns:BgtReportSpeedOver" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BgtReportSpeedOver">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="VelocityGps" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="VelocityAllow" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="VelocityAverage" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalTime" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LandmarkName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="HighwayVelocityAllow" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LngLat" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EndAddress" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MechanicalKm" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="GpsKm" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="Note" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Route" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartLongitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartLatitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndLongitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndLatitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="SynCount" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsSync" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="VBefore" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TransportType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="VehicleID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehiclePlate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrivateCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CompanyID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DriverLicense" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DriverName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="EmployeeID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAllReportStop">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="xnCode" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="toDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="vehiclePlates" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="totalTime" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="minuteMachineOn" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="minuteConditionOn" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="stopInvalid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllReportStopResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllReportStopResult" type="tns:BADataReportStop" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BADataReportStop">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MessageResult" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorType" type="tns:BAServiceErrorType" />
+          <s:element minOccurs="0" maxOccurs="1" name="BAReportStops" type="tns:ArrayOfReportStop" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfReportStop">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ReportStop" nillable="true" type="tns:ReportStop" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ReportStop">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TotalTimeStop" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TotalTimeStopString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Longitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Latitude" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="LatLngString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MinutesOfManchineOn" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MinutesOfAirConditioningOn" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SpeedOverTotalTime" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartTimeString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LngLat" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsValid" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EndAddress" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MechanicalKm" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="GpsKm" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="Note" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Route" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartLongitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartLatitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndLongitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndLatitude" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="SynCount" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsSync" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="VBefore" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TransportType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="VehicleID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="VehiclePlate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrivateCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CompanyID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DriverLicense" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DriverName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="EmployeeID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="JAC_GetKmByVehicle">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customerCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="toDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="vehiclePlates" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="JAC_GetKmByVehicleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="JAC_GetKmByVehicleResult" type="tns:ArrayOfBAData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBAData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BAData" nillable="true" type="tns:BAData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BAData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorInfor" type="tns:ErrorInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="SummaryReport" type="tns:SummaryReport" />
+          <s:element minOccurs="0" maxOccurs="1" name="StationReport" type="tns:StationReport" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ErrorInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorStr" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SummaryReport">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VehiclePlate" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalKmGps" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalKmMechanical" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndTime" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="StationReport">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VehiclePlate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StationDetails" type="tns:ArrayOfStationDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfStationDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="StationDetail" nillable="true" type="tns:StationDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="StationDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeToStation" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeOutStation" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="JAC_GetKmByVehicle_AllowMissRoute">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="customerCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="toDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="vehiclePlates" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="allowMissRoute" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="JAC_GetKmByVehicle_AllowMissRouteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="JAC_GetKmByVehicle_AllowMissRouteResult" type="tns:ArrayOfBAData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CustomerCareInsertCompany">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="companyType" type="s:unsignedByte" />
+            <s:element minOccurs="0" maxOccurs="1" name="xnCodeStr" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="companyName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="transportTypes" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="businessmanEmail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="taxCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="provindeId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="partnerId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CustomerCareInsertCompanyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerCareInsertCompanyResult" type="tns:BADataCskhTw" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BADataCskhTw">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MessageResult" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorType" type="tns:BADataCskhTwErrorCode" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="BADataCskhTwErrorCode">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="AccessDenied" />
+          <s:enumeration value="ErrorDateTime" />
+          <s:enumeration value="InvalidVehicle" />
+          <s:enumeration value="ErrorInProcessing" />
+          <s:enumeration value="ParentCompanyInvalid" />
+          <s:enumeration value="AddCompanyFail" />
+          <s:enumeration value="HaveNoPassword" />
+          <s:enumeration value="ExistUserName" />
+          <s:enumeration value="AddUserFail" />
+          <s:enumeration value="AddCompanyBusinessManFail" />
+          <s:enumeration value="MoreThan30CompaniesChild" />
+          <s:enumeration value="MoreThan50Vehicles" />
+          <s:enumeration value="IsExistOrNotBelongPartner" />
+          <s:enumeration value="PhoneNumberIsInvalid" />
+          <s:enumeration value="CompanyTypeInvalid" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="InsertSimVehicle">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="xnCode" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="vehiclePlate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="telecomCompanyId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="simType" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertSimVehicleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertSimVehicleResult" type="tns:BADataCskhTw" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BAVehicle" nillable="true" type="tns:BAVehicle" />
+      <s:element name="BADataKm" nillable="true" type="tns:BADataKm" />
+      <s:element name="BADataRoute" nillable="true" type="tns:BADataRoute" />
+      <s:element name="BADataReportActivityDetail" nillable="true" type="tns:BADataReportActivityDetail" />
+      <s:element name="BADataBgtReportSpeedOver" nillable="true" type="tns:BADataBgtReportSpeedOver" />
+      <s:element name="BADataReportStop" nillable="true" type="tns:BADataReportStop" />
+      <s:element name="ArrayOfBAData" nillable="true" type="tns:ArrayOfBAData" />
+      <s:element name="BADataCskhTw" nillable="true" type="tns:BADataCskhTw" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetVehicleInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVehicleInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVehicleInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoAPIAuthenticationHeader">
+    <wsdl:part name="APIAuthenticationHeader" element="tns:APIAuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoWithAddressSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVehicleInfoWithAddress" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoWithAddressSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVehicleInfoWithAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoWithAddressAPIAuthenticationHeader">
+    <wsdl:part name="APIAuthenticationHeader" element="tns:APIAuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetDataKmSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDataKm" />
+  </wsdl:message>
+  <wsdl:message name="GetDataKmSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDataKmResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDataKmAPIAuthenticationHeader">
+    <wsdl:part name="APIAuthenticationHeader" element="tns:APIAuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoByCompanyIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVehicleInfoByCompanyID" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoByCompanyIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVehicleInfoByCompanyIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoByCompanyIDAPIAuthenticationHeader">
+    <wsdl:part name="APIAuthenticationHeader" element="tns:APIAuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoDetailByCompanyIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVehicleInfoDetailByCompanyID" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoDetailByCompanyIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVehicleInfoDetailByCompanyIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoDetailByCompanyIDAPIAuthenticationHeader">
+    <wsdl:part name="APIAuthenticationHeader" element="tns:APIAuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleOnlineByCompanyIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVehicleOnlineByCompanyID" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleOnlineByCompanyIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVehicleOnlineByCompanyIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleOnlineByCompanyIDAPIAuthenticationHeader">
+    <wsdl:part name="APIAuthenticationHeader" element="tns:APIAuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleLocationByCompanyIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVehicleLocationByCompanyID" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleLocationByCompanyIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVehicleLocationByCompanyIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleLocationByCompanyIDAPIAuthenticationHeader">
+    <wsdl:part name="APIAuthenticationHeader" element="tns:APIAuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetDataKmByCompanyIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDataKmByCompanyID" />
+  </wsdl:message>
+  <wsdl:message name="GetDataKmByCompanyIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDataKmByCompanyIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDataKmByCompanyIDAPIAuthenticationHeader">
+    <wsdl:part name="APIAuthenticationHeader" element="tns:APIAuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteByCompanyIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRouteByCompanyID" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteByCompanyIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRouteByCompanyIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteByCompanyIDAPIAuthenticationHeader">
+    <wsdl:part name="APIAuthenticationHeader" element="tns:APIAuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteByCompanyIDWithAddressSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRouteByCompanyIDWithAddress" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteByCompanyIDWithAddressSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRouteByCompanyIDWithAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteByCompanyIDWithAddressAPIAuthenticationHeader">
+    <wsdl:part name="APIAuthenticationHeader" element="tns:APIAuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteByCompanyIDWithAddressNewSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRouteByCompanyIDWithAddressNew" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteByCompanyIDWithAddressNewSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRouteByCompanyIDWithAddressNewResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteByCompanyIDWithAddressNewAPIAuthenticationHeader">
+    <wsdl:part name="APIAuthenticationHeader" element="tns:APIAuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetAllActivityDetailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllActivityDetail" />
+  </wsdl:message>
+  <wsdl:message name="GetAllActivityDetailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllActivityDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllActivityDetailAPIAuthenticationHeader">
+    <wsdl:part name="APIAuthenticationHeader" element="tns:APIAuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBgtReportSpeedOverSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllBgtReportSpeedOver" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBgtReportSpeedOverSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllBgtReportSpeedOverResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBgtReportSpeedOverAPIAuthenticationHeader">
+    <wsdl:part name="APIAuthenticationHeader" element="tns:APIAuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetAllReportStopSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllReportStop" />
+  </wsdl:message>
+  <wsdl:message name="GetAllReportStopSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllReportStopResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllReportStopAPIAuthenticationHeader">
+    <wsdl:part name="APIAuthenticationHeader" element="tns:APIAuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="JAC_GetKmByVehicleSoapIn">
+    <wsdl:part name="parameters" element="tns:JAC_GetKmByVehicle" />
+  </wsdl:message>
+  <wsdl:message name="JAC_GetKmByVehicleSoapOut">
+    <wsdl:part name="parameters" element="tns:JAC_GetKmByVehicleResponse" />
+  </wsdl:message>
+  <wsdl:message name="JAC_GetKmByVehicleAPIAuthenticationHeader">
+    <wsdl:part name="APIAuthenticationHeader" element="tns:APIAuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="JAC_GetKmByVehicle_AllowMissRouteSoapIn">
+    <wsdl:part name="parameters" element="tns:JAC_GetKmByVehicle_AllowMissRoute" />
+  </wsdl:message>
+  <wsdl:message name="JAC_GetKmByVehicle_AllowMissRouteSoapOut">
+    <wsdl:part name="parameters" element="tns:JAC_GetKmByVehicle_AllowMissRouteResponse" />
+  </wsdl:message>
+  <wsdl:message name="JAC_GetKmByVehicle_AllowMissRouteAPIAuthenticationHeader">
+    <wsdl:part name="APIAuthenticationHeader" element="tns:APIAuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="CustomerCareInsertCompanySoapIn">
+    <wsdl:part name="parameters" element="tns:CustomerCareInsertCompany" />
+  </wsdl:message>
+  <wsdl:message name="CustomerCareInsertCompanySoapOut">
+    <wsdl:part name="parameters" element="tns:CustomerCareInsertCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="CustomerCareInsertCompanyAPIAuthenticationHeader">
+    <wsdl:part name="APIAuthenticationHeader" element="tns:APIAuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="InsertSimVehicleSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertSimVehicle" />
+  </wsdl:message>
+  <wsdl:message name="InsertSimVehicleSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertSimVehicleResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertSimVehicleAPIAuthenticationHeader">
+    <wsdl:part name="APIAuthenticationHeader" element="tns:APIAuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoHttpGetIn">
+    <wsdl:part name="xnCode" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:BAVehicle" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoWithAddressHttpGetIn">
+    <wsdl:part name="xnCode" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoWithAddressHttpGetOut">
+    <wsdl:part name="Body" element="tns:BAVehicle" />
+  </wsdl:message>
+  <wsdl:message name="GetDataKmHttpGetIn">
+    <wsdl:part name="xnCode" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="vehiclePlate" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataKmHttpGetOut">
+    <wsdl:part name="Body" element="tns:BADataKm" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoByCompanyIDHttpGetIn">
+    <wsdl:part name="companyID" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoByCompanyIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:BAVehicle" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoDetailByCompanyIDHttpGetIn">
+    <wsdl:part name="companyID" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="plates" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoDetailByCompanyIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:BAVehicle" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleOnlineByCompanyIDHttpGetIn">
+    <wsdl:part name="companyID" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleOnlineByCompanyIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:BAVehicle" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleLocationByCompanyIDHttpGetIn">
+    <wsdl:part name="companyID" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="vehiclePlate" type="s:string" />
+    <wsdl:part name="time" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleLocationByCompanyIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:BAVehicle" />
+  </wsdl:message>
+  <wsdl:message name="GetDataKmByCompanyIDHttpGetIn">
+    <wsdl:part name="companyID" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="vehiclePlate" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataKmByCompanyIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:BADataKm" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteByCompanyIDHttpGetIn">
+    <wsdl:part name="companyID" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="vehiclePlate" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteByCompanyIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:BADataRoute" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteByCompanyIDWithAddressHttpGetIn">
+    <wsdl:part name="companyID" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="vehiclePlate" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteByCompanyIDWithAddressHttpGetOut">
+    <wsdl:part name="Body" element="tns:BADataRoute" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteByCompanyIDWithAddressNewHttpGetIn">
+    <wsdl:part name="companyID" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="vehiclePlate" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteByCompanyIDWithAddressNewHttpGetOut">
+    <wsdl:part name="Body" element="tns:BADataRoute" />
+  </wsdl:message>
+  <wsdl:message name="GetAllActivityDetailHttpGetIn">
+    <wsdl:part name="xnCode" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+    <wsdl:part name="vehiclePlates" type="s:string" />
+    <wsdl:part name="isGroupKm" type="s:string" />
+    <wsdl:part name="minTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllActivityDetailHttpGetOut">
+    <wsdl:part name="Body" element="tns:BADataReportActivityDetail" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBgtReportSpeedOverHttpGetIn">
+    <wsdl:part name="xnCode" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+    <wsdl:part name="vehiclePlates" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBgtReportSpeedOverHttpGetOut">
+    <wsdl:part name="Body" element="tns:BADataBgtReportSpeedOver" />
+  </wsdl:message>
+  <wsdl:message name="GetAllReportStopHttpGetIn">
+    <wsdl:part name="xnCode" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+    <wsdl:part name="vehiclePlates" type="s:string" />
+    <wsdl:part name="totalTime" type="s:string" />
+    <wsdl:part name="minuteMachineOn" type="s:string" />
+    <wsdl:part name="minuteConditionOn" type="s:string" />
+    <wsdl:part name="stopInvalid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllReportStopHttpGetOut">
+    <wsdl:part name="Body" element="tns:BADataReportStop" />
+  </wsdl:message>
+  <wsdl:message name="JAC_GetKmByVehicleHttpGetIn">
+    <wsdl:part name="customerCode" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+    <wsdl:part name="vehiclePlates" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="JAC_GetKmByVehicleHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfBAData" />
+  </wsdl:message>
+  <wsdl:message name="JAC_GetKmByVehicle_AllowMissRouteHttpGetIn">
+    <wsdl:part name="customerCode" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+    <wsdl:part name="vehiclePlates" type="s:string" />
+    <wsdl:part name="allowMissRoute" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="JAC_GetKmByVehicle_AllowMissRouteHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfBAData" />
+  </wsdl:message>
+  <wsdl:message name="CustomerCareInsertCompanyHttpGetIn">
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="companyType" type="s:string" />
+    <wsdl:part name="xnCodeStr" type="s:string" />
+    <wsdl:part name="companyName" type="s:string" />
+    <wsdl:part name="address" type="s:string" />
+    <wsdl:part name="phoneNumber" type="s:string" />
+    <wsdl:part name="transportTypes" type="s:string" />
+    <wsdl:part name="businessmanEmail" type="s:string" />
+    <wsdl:part name="userName" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="taxCode" type="s:string" />
+    <wsdl:part name="provindeId" type="s:string" />
+    <wsdl:part name="partnerId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CustomerCareInsertCompanyHttpGetOut">
+    <wsdl:part name="Body" element="tns:BADataCskhTw" />
+  </wsdl:message>
+  <wsdl:message name="InsertSimVehicleHttpGetIn">
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="xnCode" type="s:string" />
+    <wsdl:part name="vehiclePlate" type="s:string" />
+    <wsdl:part name="phoneNumber" type="s:string" />
+    <wsdl:part name="telecomCompanyId" type="s:string" />
+    <wsdl:part name="simType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertSimVehicleHttpGetOut">
+    <wsdl:part name="Body" element="tns:BADataCskhTw" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoHttpPostIn">
+    <wsdl:part name="xnCode" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:BAVehicle" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoWithAddressHttpPostIn">
+    <wsdl:part name="xnCode" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoWithAddressHttpPostOut">
+    <wsdl:part name="Body" element="tns:BAVehicle" />
+  </wsdl:message>
+  <wsdl:message name="GetDataKmHttpPostIn">
+    <wsdl:part name="xnCode" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="vehiclePlate" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataKmHttpPostOut">
+    <wsdl:part name="Body" element="tns:BADataKm" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoByCompanyIDHttpPostIn">
+    <wsdl:part name="companyID" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoByCompanyIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:BAVehicle" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoDetailByCompanyIDHttpPostIn">
+    <wsdl:part name="companyID" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="plates" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleInfoDetailByCompanyIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:BAVehicle" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleOnlineByCompanyIDHttpPostIn">
+    <wsdl:part name="companyID" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleOnlineByCompanyIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:BAVehicle" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleLocationByCompanyIDHttpPostIn">
+    <wsdl:part name="companyID" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="vehiclePlate" type="s:string" />
+    <wsdl:part name="time" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetVehicleLocationByCompanyIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:BAVehicle" />
+  </wsdl:message>
+  <wsdl:message name="GetDataKmByCompanyIDHttpPostIn">
+    <wsdl:part name="companyID" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="vehiclePlate" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDataKmByCompanyIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:BADataKm" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteByCompanyIDHttpPostIn">
+    <wsdl:part name="companyID" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="vehiclePlate" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteByCompanyIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:BADataRoute" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteByCompanyIDWithAddressHttpPostIn">
+    <wsdl:part name="companyID" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="vehiclePlate" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteByCompanyIDWithAddressHttpPostOut">
+    <wsdl:part name="Body" element="tns:BADataRoute" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteByCompanyIDWithAddressNewHttpPostIn">
+    <wsdl:part name="companyID" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="vehiclePlate" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRouteByCompanyIDWithAddressNewHttpPostOut">
+    <wsdl:part name="Body" element="tns:BADataRoute" />
+  </wsdl:message>
+  <wsdl:message name="GetAllActivityDetailHttpPostIn">
+    <wsdl:part name="xnCode" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+    <wsdl:part name="vehiclePlates" type="s:string" />
+    <wsdl:part name="isGroupKm" type="s:string" />
+    <wsdl:part name="minTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllActivityDetailHttpPostOut">
+    <wsdl:part name="Body" element="tns:BADataReportActivityDetail" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBgtReportSpeedOverHttpPostIn">
+    <wsdl:part name="xnCode" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+    <wsdl:part name="vehiclePlates" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBgtReportSpeedOverHttpPostOut">
+    <wsdl:part name="Body" element="tns:BADataBgtReportSpeedOver" />
+  </wsdl:message>
+  <wsdl:message name="GetAllReportStopHttpPostIn">
+    <wsdl:part name="xnCode" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+    <wsdl:part name="vehiclePlates" type="s:string" />
+    <wsdl:part name="totalTime" type="s:string" />
+    <wsdl:part name="minuteMachineOn" type="s:string" />
+    <wsdl:part name="minuteConditionOn" type="s:string" />
+    <wsdl:part name="stopInvalid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllReportStopHttpPostOut">
+    <wsdl:part name="Body" element="tns:BADataReportStop" />
+  </wsdl:message>
+  <wsdl:message name="JAC_GetKmByVehicleHttpPostIn">
+    <wsdl:part name="customerCode" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+    <wsdl:part name="vehiclePlates" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="JAC_GetKmByVehicleHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfBAData" />
+  </wsdl:message>
+  <wsdl:message name="JAC_GetKmByVehicle_AllowMissRouteHttpPostIn">
+    <wsdl:part name="customerCode" type="s:string" />
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+    <wsdl:part name="vehiclePlates" type="s:string" />
+    <wsdl:part name="allowMissRoute" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="JAC_GetKmByVehicle_AllowMissRouteHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfBAData" />
+  </wsdl:message>
+  <wsdl:message name="CustomerCareInsertCompanyHttpPostIn">
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="companyType" type="s:string" />
+    <wsdl:part name="xnCodeStr" type="s:string" />
+    <wsdl:part name="companyName" type="s:string" />
+    <wsdl:part name="address" type="s:string" />
+    <wsdl:part name="phoneNumber" type="s:string" />
+    <wsdl:part name="transportTypes" type="s:string" />
+    <wsdl:part name="businessmanEmail" type="s:string" />
+    <wsdl:part name="userName" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="taxCode" type="s:string" />
+    <wsdl:part name="provindeId" type="s:string" />
+    <wsdl:part name="partnerId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CustomerCareInsertCompanyHttpPostOut">
+    <wsdl:part name="Body" element="tns:BADataCskhTw" />
+  </wsdl:message>
+  <wsdl:message name="InsertSimVehicleHttpPostIn">
+    <wsdl:part name="key" type="s:string" />
+    <wsdl:part name="xnCode" type="s:string" />
+    <wsdl:part name="vehiclePlate" type="s:string" />
+    <wsdl:part name="phoneNumber" type="s:string" />
+    <wsdl:part name="telecomCompanyId" type="s:string" />
+    <wsdl:part name="simType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertSimVehicleHttpPostOut">
+    <wsdl:part name="Body" element="tns:BADataCskhTw" />
+  </wsdl:message>
+  <wsdl:portType name="BinhAnhSoap">
+    <wsdl:operation name="GetVehicleInfo">
+      <wsdl:input message="tns:GetVehicleInfoSoapIn" />
+      <wsdl:output message="tns:GetVehicleInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleInfoWithAddress">
+      <wsdl:input message="tns:GetVehicleInfoWithAddressSoapIn" />
+      <wsdl:output message="tns:GetVehicleInfoWithAddressSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataKm">
+      <wsdl:input message="tns:GetDataKmSoapIn" />
+      <wsdl:output message="tns:GetDataKmSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleInfoByCompanyID">
+      <wsdl:input message="tns:GetVehicleInfoByCompanyIDSoapIn" />
+      <wsdl:output message="tns:GetVehicleInfoByCompanyIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleInfoDetailByCompanyID">
+      <wsdl:input message="tns:GetVehicleInfoDetailByCompanyIDSoapIn" />
+      <wsdl:output message="tns:GetVehicleInfoDetailByCompanyIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleOnlineByCompanyID">
+      <wsdl:input message="tns:GetVehicleOnlineByCompanyIDSoapIn" />
+      <wsdl:output message="tns:GetVehicleOnlineByCompanyIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleLocationByCompanyID">
+      <wsdl:input message="tns:GetVehicleLocationByCompanyIDSoapIn" />
+      <wsdl:output message="tns:GetVehicleLocationByCompanyIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataKmByCompanyID">
+      <wsdl:input message="tns:GetDataKmByCompanyIDSoapIn" />
+      <wsdl:output message="tns:GetDataKmByCompanyIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteByCompanyID">
+      <wsdl:input message="tns:GetRouteByCompanyIDSoapIn" />
+      <wsdl:output message="tns:GetRouteByCompanyIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteByCompanyIDWithAddress">
+      <wsdl:input message="tns:GetRouteByCompanyIDWithAddressSoapIn" />
+      <wsdl:output message="tns:GetRouteByCompanyIDWithAddressSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteByCompanyIDWithAddressNew">
+      <wsdl:input message="tns:GetRouteByCompanyIDWithAddressNewSoapIn" />
+      <wsdl:output message="tns:GetRouteByCompanyIDWithAddressNewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllActivityDetail">
+      <wsdl:input message="tns:GetAllActivityDetailSoapIn" />
+      <wsdl:output message="tns:GetAllActivityDetailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBgtReportSpeedOver">
+      <wsdl:input message="tns:GetAllBgtReportSpeedOverSoapIn" />
+      <wsdl:output message="tns:GetAllBgtReportSpeedOverSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReportStop">
+      <wsdl:input message="tns:GetAllReportStopSoapIn" />
+      <wsdl:output message="tns:GetAllReportStopSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="JAC_GetKmByVehicle">
+      <wsdl:input message="tns:JAC_GetKmByVehicleSoapIn" />
+      <wsdl:output message="tns:JAC_GetKmByVehicleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="JAC_GetKmByVehicle_AllowMissRoute">
+      <wsdl:input message="tns:JAC_GetKmByVehicle_AllowMissRouteSoapIn" />
+      <wsdl:output message="tns:JAC_GetKmByVehicle_AllowMissRouteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CustomerCareInsertCompany">
+      <wsdl:input message="tns:CustomerCareInsertCompanySoapIn" />
+      <wsdl:output message="tns:CustomerCareInsertCompanySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertSimVehicle">
+      <wsdl:input message="tns:InsertSimVehicleSoapIn" />
+      <wsdl:output message="tns:InsertSimVehicleSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BinhAnhHttpGet">
+    <wsdl:operation name="GetVehicleInfo">
+      <wsdl:input message="tns:GetVehicleInfoHttpGetIn" />
+      <wsdl:output message="tns:GetVehicleInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleInfoWithAddress">
+      <wsdl:input message="tns:GetVehicleInfoWithAddressHttpGetIn" />
+      <wsdl:output message="tns:GetVehicleInfoWithAddressHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataKm">
+      <wsdl:input message="tns:GetDataKmHttpGetIn" />
+      <wsdl:output message="tns:GetDataKmHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleInfoByCompanyID">
+      <wsdl:input message="tns:GetVehicleInfoByCompanyIDHttpGetIn" />
+      <wsdl:output message="tns:GetVehicleInfoByCompanyIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleInfoDetailByCompanyID">
+      <wsdl:input message="tns:GetVehicleInfoDetailByCompanyIDHttpGetIn" />
+      <wsdl:output message="tns:GetVehicleInfoDetailByCompanyIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleOnlineByCompanyID">
+      <wsdl:input message="tns:GetVehicleOnlineByCompanyIDHttpGetIn" />
+      <wsdl:output message="tns:GetVehicleOnlineByCompanyIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleLocationByCompanyID">
+      <wsdl:input message="tns:GetVehicleLocationByCompanyIDHttpGetIn" />
+      <wsdl:output message="tns:GetVehicleLocationByCompanyIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataKmByCompanyID">
+      <wsdl:input message="tns:GetDataKmByCompanyIDHttpGetIn" />
+      <wsdl:output message="tns:GetDataKmByCompanyIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteByCompanyID">
+      <wsdl:input message="tns:GetRouteByCompanyIDHttpGetIn" />
+      <wsdl:output message="tns:GetRouteByCompanyIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteByCompanyIDWithAddress">
+      <wsdl:input message="tns:GetRouteByCompanyIDWithAddressHttpGetIn" />
+      <wsdl:output message="tns:GetRouteByCompanyIDWithAddressHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteByCompanyIDWithAddressNew">
+      <wsdl:input message="tns:GetRouteByCompanyIDWithAddressNewHttpGetIn" />
+      <wsdl:output message="tns:GetRouteByCompanyIDWithAddressNewHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllActivityDetail">
+      <wsdl:input message="tns:GetAllActivityDetailHttpGetIn" />
+      <wsdl:output message="tns:GetAllActivityDetailHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBgtReportSpeedOver">
+      <wsdl:input message="tns:GetAllBgtReportSpeedOverHttpGetIn" />
+      <wsdl:output message="tns:GetAllBgtReportSpeedOverHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReportStop">
+      <wsdl:input message="tns:GetAllReportStopHttpGetIn" />
+      <wsdl:output message="tns:GetAllReportStopHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="JAC_GetKmByVehicle">
+      <wsdl:input message="tns:JAC_GetKmByVehicleHttpGetIn" />
+      <wsdl:output message="tns:JAC_GetKmByVehicleHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="JAC_GetKmByVehicle_AllowMissRoute">
+      <wsdl:input message="tns:JAC_GetKmByVehicle_AllowMissRouteHttpGetIn" />
+      <wsdl:output message="tns:JAC_GetKmByVehicle_AllowMissRouteHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CustomerCareInsertCompany">
+      <wsdl:input message="tns:CustomerCareInsertCompanyHttpGetIn" />
+      <wsdl:output message="tns:CustomerCareInsertCompanyHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertSimVehicle">
+      <wsdl:input message="tns:InsertSimVehicleHttpGetIn" />
+      <wsdl:output message="tns:InsertSimVehicleHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BinhAnhHttpPost">
+    <wsdl:operation name="GetVehicleInfo">
+      <wsdl:input message="tns:GetVehicleInfoHttpPostIn" />
+      <wsdl:output message="tns:GetVehicleInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleInfoWithAddress">
+      <wsdl:input message="tns:GetVehicleInfoWithAddressHttpPostIn" />
+      <wsdl:output message="tns:GetVehicleInfoWithAddressHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataKm">
+      <wsdl:input message="tns:GetDataKmHttpPostIn" />
+      <wsdl:output message="tns:GetDataKmHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleInfoByCompanyID">
+      <wsdl:input message="tns:GetVehicleInfoByCompanyIDHttpPostIn" />
+      <wsdl:output message="tns:GetVehicleInfoByCompanyIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleInfoDetailByCompanyID">
+      <wsdl:input message="tns:GetVehicleInfoDetailByCompanyIDHttpPostIn" />
+      <wsdl:output message="tns:GetVehicleInfoDetailByCompanyIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleOnlineByCompanyID">
+      <wsdl:input message="tns:GetVehicleOnlineByCompanyIDHttpPostIn" />
+      <wsdl:output message="tns:GetVehicleOnlineByCompanyIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleLocationByCompanyID">
+      <wsdl:input message="tns:GetVehicleLocationByCompanyIDHttpPostIn" />
+      <wsdl:output message="tns:GetVehicleLocationByCompanyIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataKmByCompanyID">
+      <wsdl:input message="tns:GetDataKmByCompanyIDHttpPostIn" />
+      <wsdl:output message="tns:GetDataKmByCompanyIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteByCompanyID">
+      <wsdl:input message="tns:GetRouteByCompanyIDHttpPostIn" />
+      <wsdl:output message="tns:GetRouteByCompanyIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteByCompanyIDWithAddress">
+      <wsdl:input message="tns:GetRouteByCompanyIDWithAddressHttpPostIn" />
+      <wsdl:output message="tns:GetRouteByCompanyIDWithAddressHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteByCompanyIDWithAddressNew">
+      <wsdl:input message="tns:GetRouteByCompanyIDWithAddressNewHttpPostIn" />
+      <wsdl:output message="tns:GetRouteByCompanyIDWithAddressNewHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllActivityDetail">
+      <wsdl:input message="tns:GetAllActivityDetailHttpPostIn" />
+      <wsdl:output message="tns:GetAllActivityDetailHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBgtReportSpeedOver">
+      <wsdl:input message="tns:GetAllBgtReportSpeedOverHttpPostIn" />
+      <wsdl:output message="tns:GetAllBgtReportSpeedOverHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReportStop">
+      <wsdl:input message="tns:GetAllReportStopHttpPostIn" />
+      <wsdl:output message="tns:GetAllReportStopHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="JAC_GetKmByVehicle">
+      <wsdl:input message="tns:JAC_GetKmByVehicleHttpPostIn" />
+      <wsdl:output message="tns:JAC_GetKmByVehicleHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="JAC_GetKmByVehicle_AllowMissRoute">
+      <wsdl:input message="tns:JAC_GetKmByVehicle_AllowMissRouteHttpPostIn" />
+      <wsdl:output message="tns:JAC_GetKmByVehicle_AllowMissRouteHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CustomerCareInsertCompany">
+      <wsdl:input message="tns:CustomerCareInsertCompanyHttpPostIn" />
+      <wsdl:output message="tns:CustomerCareInsertCompanyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertSimVehicle">
+      <wsdl:input message="tns:InsertSimVehicleHttpPostIn" />
+      <wsdl:output message="tns:InsertSimVehicleHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BinhAnhSoap" type="tns:BinhAnhSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetVehicleInfo">
+      <soap:operation soapAction="http://gps.binhanh.com.vn/GetVehicleInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetVehicleInfoAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleInfoWithAddress">
+      <soap:operation soapAction="http://gps.binhanh.com.vn/GetVehicleInfoWithAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetVehicleInfoWithAddressAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataKm">
+      <soap:operation soapAction="http://gps.binhanh.com.vn/GetDataKm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetDataKmAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleInfoByCompanyID">
+      <soap:operation soapAction="http://gps.binhanh.com.vn/GetVehicleInfoByCompanyID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetVehicleInfoByCompanyIDAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleInfoDetailByCompanyID">
+      <soap:operation soapAction="http://gps.binhanh.com.vn/GetVehicleInfoDetailByCompanyID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetVehicleInfoDetailByCompanyIDAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleOnlineByCompanyID">
+      <soap:operation soapAction="http://gps.binhanh.com.vn/GetVehicleOnlineByCompanyID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetVehicleOnlineByCompanyIDAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleLocationByCompanyID">
+      <soap:operation soapAction="http://gps.binhanh.com.vn/GetVehicleLocationByCompanyID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetVehicleLocationByCompanyIDAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataKmByCompanyID">
+      <soap:operation soapAction="http://gps.binhanh.com.vn/GetDataKmByCompanyID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetDataKmByCompanyIDAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteByCompanyID">
+      <soap:operation soapAction="http://gps.binhanh.com.vn/GetRouteByCompanyID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetRouteByCompanyIDAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteByCompanyIDWithAddress">
+      <soap:operation soapAction="http://gps.binhanh.com.vn/GetRouteByCompanyIDWithAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetRouteByCompanyIDWithAddressAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteByCompanyIDWithAddressNew">
+      <soap:operation soapAction="http://gps.binhanh.com.vn/GetRouteByCompanyIDWithAddressNew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetRouteByCompanyIDWithAddressNewAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllActivityDetail">
+      <soap:operation soapAction="http://gps.binhanh.com.vn/GetAllActivityDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetAllActivityDetailAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBgtReportSpeedOver">
+      <soap:operation soapAction="http://gps.binhanh.com.vn/GetAllBgtReportSpeedOver" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetAllBgtReportSpeedOverAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReportStop">
+      <soap:operation soapAction="http://gps.binhanh.com.vn/GetAllReportStop" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetAllReportStopAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JAC_GetKmByVehicle">
+      <soap:operation soapAction="http://gps.binhanh.com.vn/JAC_GetKmByVehicle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:JAC_GetKmByVehicleAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JAC_GetKmByVehicle_AllowMissRoute">
+      <soap:operation soapAction="http://gps.binhanh.com.vn/JAC_GetKmByVehicle_AllowMissRoute" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:JAC_GetKmByVehicle_AllowMissRouteAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerCareInsertCompany">
+      <soap:operation soapAction="http://gps.binhanh.com.vn/CustomerCareInsertCompany" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CustomerCareInsertCompanyAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertSimVehicle">
+      <soap:operation soapAction="http://gps.binhanh.com.vn/InsertSimVehicle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:InsertSimVehicleAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BinhAnhSoap12" type="tns:BinhAnhSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetVehicleInfo">
+      <soap12:operation soapAction="http://gps.binhanh.com.vn/GetVehicleInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetVehicleInfoAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleInfoWithAddress">
+      <soap12:operation soapAction="http://gps.binhanh.com.vn/GetVehicleInfoWithAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetVehicleInfoWithAddressAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataKm">
+      <soap12:operation soapAction="http://gps.binhanh.com.vn/GetDataKm" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetDataKmAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleInfoByCompanyID">
+      <soap12:operation soapAction="http://gps.binhanh.com.vn/GetVehicleInfoByCompanyID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetVehicleInfoByCompanyIDAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleInfoDetailByCompanyID">
+      <soap12:operation soapAction="http://gps.binhanh.com.vn/GetVehicleInfoDetailByCompanyID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetVehicleInfoDetailByCompanyIDAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleOnlineByCompanyID">
+      <soap12:operation soapAction="http://gps.binhanh.com.vn/GetVehicleOnlineByCompanyID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetVehicleOnlineByCompanyIDAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleLocationByCompanyID">
+      <soap12:operation soapAction="http://gps.binhanh.com.vn/GetVehicleLocationByCompanyID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetVehicleLocationByCompanyIDAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataKmByCompanyID">
+      <soap12:operation soapAction="http://gps.binhanh.com.vn/GetDataKmByCompanyID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetDataKmByCompanyIDAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteByCompanyID">
+      <soap12:operation soapAction="http://gps.binhanh.com.vn/GetRouteByCompanyID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetRouteByCompanyIDAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteByCompanyIDWithAddress">
+      <soap12:operation soapAction="http://gps.binhanh.com.vn/GetRouteByCompanyIDWithAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetRouteByCompanyIDWithAddressAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteByCompanyIDWithAddressNew">
+      <soap12:operation soapAction="http://gps.binhanh.com.vn/GetRouteByCompanyIDWithAddressNew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetRouteByCompanyIDWithAddressNewAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllActivityDetail">
+      <soap12:operation soapAction="http://gps.binhanh.com.vn/GetAllActivityDetail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetAllActivityDetailAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBgtReportSpeedOver">
+      <soap12:operation soapAction="http://gps.binhanh.com.vn/GetAllBgtReportSpeedOver" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetAllBgtReportSpeedOverAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReportStop">
+      <soap12:operation soapAction="http://gps.binhanh.com.vn/GetAllReportStop" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetAllReportStopAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JAC_GetKmByVehicle">
+      <soap12:operation soapAction="http://gps.binhanh.com.vn/JAC_GetKmByVehicle" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:JAC_GetKmByVehicleAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JAC_GetKmByVehicle_AllowMissRoute">
+      <soap12:operation soapAction="http://gps.binhanh.com.vn/JAC_GetKmByVehicle_AllowMissRoute" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:JAC_GetKmByVehicle_AllowMissRouteAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerCareInsertCompany">
+      <soap12:operation soapAction="http://gps.binhanh.com.vn/CustomerCareInsertCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CustomerCareInsertCompanyAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertSimVehicle">
+      <soap12:operation soapAction="http://gps.binhanh.com.vn/InsertSimVehicle" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:InsertSimVehicleAPIAuthenticationHeader" part="APIAuthenticationHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BinhAnhHttpGet" type="tns:BinhAnhHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetVehicleInfo">
+      <http:operation location="/GetVehicleInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleInfoWithAddress">
+      <http:operation location="/GetVehicleInfoWithAddress" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataKm">
+      <http:operation location="/GetDataKm" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleInfoByCompanyID">
+      <http:operation location="/GetVehicleInfoByCompanyID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleInfoDetailByCompanyID">
+      <http:operation location="/GetVehicleInfoDetailByCompanyID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleOnlineByCompanyID">
+      <http:operation location="/GetVehicleOnlineByCompanyID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleLocationByCompanyID">
+      <http:operation location="/GetVehicleLocationByCompanyID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataKmByCompanyID">
+      <http:operation location="/GetDataKmByCompanyID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteByCompanyID">
+      <http:operation location="/GetRouteByCompanyID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteByCompanyIDWithAddress">
+      <http:operation location="/GetRouteByCompanyIDWithAddress" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteByCompanyIDWithAddressNew">
+      <http:operation location="/GetRouteByCompanyIDWithAddressNew" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllActivityDetail">
+      <http:operation location="/GetAllActivityDetail" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBgtReportSpeedOver">
+      <http:operation location="/GetAllBgtReportSpeedOver" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReportStop">
+      <http:operation location="/GetAllReportStop" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JAC_GetKmByVehicle">
+      <http:operation location="/JAC_GetKmByVehicle" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JAC_GetKmByVehicle_AllowMissRoute">
+      <http:operation location="/JAC_GetKmByVehicle_AllowMissRoute" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerCareInsertCompany">
+      <http:operation location="/CustomerCareInsertCompany" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertSimVehicle">
+      <http:operation location="/InsertSimVehicle" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BinhAnhHttpPost" type="tns:BinhAnhHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetVehicleInfo">
+      <http:operation location="/GetVehicleInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleInfoWithAddress">
+      <http:operation location="/GetVehicleInfoWithAddress" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataKm">
+      <http:operation location="/GetDataKm" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleInfoByCompanyID">
+      <http:operation location="/GetVehicleInfoByCompanyID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleInfoDetailByCompanyID">
+      <http:operation location="/GetVehicleInfoDetailByCompanyID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleOnlineByCompanyID">
+      <http:operation location="/GetVehicleOnlineByCompanyID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVehicleLocationByCompanyID">
+      <http:operation location="/GetVehicleLocationByCompanyID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataKmByCompanyID">
+      <http:operation location="/GetDataKmByCompanyID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteByCompanyID">
+      <http:operation location="/GetRouteByCompanyID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteByCompanyIDWithAddress">
+      <http:operation location="/GetRouteByCompanyIDWithAddress" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRouteByCompanyIDWithAddressNew">
+      <http:operation location="/GetRouteByCompanyIDWithAddressNew" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllActivityDetail">
+      <http:operation location="/GetAllActivityDetail" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBgtReportSpeedOver">
+      <http:operation location="/GetAllBgtReportSpeedOver" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReportStop">
+      <http:operation location="/GetAllReportStop" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JAC_GetKmByVehicle">
+      <http:operation location="/JAC_GetKmByVehicle" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JAC_GetKmByVehicle_AllowMissRoute">
+      <http:operation location="/JAC_GetKmByVehicle_AllowMissRoute" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerCareInsertCompany">
+      <http:operation location="/CustomerCareInsertCompany" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertSimVehicle">
+      <http:operation location="/InsertSimVehicle" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BinhAnh">
+    <wsdl:port name="BinhAnhSoap" binding="tns:BinhAnhSoap">
+      <soap:address location="http://gps4.binhanh.com.vn/WebServices/BinhAnh.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BinhAnhSoap12" binding="tns:BinhAnhSoap12">
+      <soap12:address location="http://gps4.binhanh.com.vn/WebServices/BinhAnh.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BinhAnhHttpGet" binding="tns:BinhAnhHttpGet">
+      <http:address location="http://gps4.binhanh.com.vn/WebServices/BinhAnh.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BinhAnhHttpPost" binding="tns:BinhAnhHttpPost">
+      <http:address location="http://gps4.binhanh.com.vn/WebServices/BinhAnh.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

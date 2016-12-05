@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author TungVu
  */
-public class CommonLib {
+public class CommonLibForSecondo {
 
     public static List<Trips> parseTripsFromString(String resultString) {
         List<Trips> mResult = new ArrayList<Trips>();

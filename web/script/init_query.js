@@ -218,7 +218,7 @@ function query001() {
         };
         if (Source == 2) {
 
-            var response = requestHTML("/GeoSpacialQuerries/getalls");
+            var response = requestHTML("/GeoSpacialQuerries/query001");
             var obj = convertResponseDataToObj(response);
             var txtResult = document.getElementById("resultBox").innerHTML;
             txtResult = txtResult + "<table style=\"width:100%\">";
@@ -228,13 +228,7 @@ function query001() {
                 var AtmAdress = obj[i].xLaixeHoten;
                 var d = Distance(TempLat, TempLon, TempLatAtm,
                         TempLonAtm);
-                var checkSts = false;
-                if ((obj[i].xCompanyName.toUpperCase().search(
-                        stringRequest.toUpperCase()) != -1)
-                        || (obj[i].xLaixeHoten.toUpperCase()
-                                .search(stringRequest.toUpperCase()) != -1)) {
-                    checkSts = true;
-                }
+                var checkSts = true;                
                 // kiem tra khoang cach thoa man dieu kien
                 if ((d <= distance) && (checkSts)) {
                     // alert(d);

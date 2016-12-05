@@ -14,6 +14,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -88,6 +89,67 @@ public class CommonLibForServlet {
         return result;
     }
 
+    public static String query001(String connectType) {
+        String result = "{\"data\": [";
+        switch (connectType) {
+            case "oracle":
+                break;
+            case "mssql":
+                break;
+            case "mysql": {
+                try {
+                    // Khai báo class Driver cho DB MySQL                    
+                    Class.forName("com.mysql.jdbc.Driver");
+                    // Cấu trúc URL Connection dành cho MySQL                    
+                    String connectionURL = "jdbc:mysql://" + Parameters.DATABASE_SERVER_IP_ADDRESS
+                            + ":" + Parameters.DATABASE_SERVER_PORT + "/"
+                            + Parameters.DATABASE_NAME;
+
+                    // Mở kết nối
+                    Connection conn = DriverManager.getConnection(connectionURL,
+                            Parameters.DATABASE_USERNAME, Parameters.DATABASE_PASSWORD);
+
+                    // Truy vấn
+                    Statement stmt = conn.createStatement();
+                    String sql = "select * from vehicle";
+
+                    ResultSet rs = stmt.executeQuery(sql);
+
+                    //STEP 5: Extract data from result set
+                    while (rs.next()) {
+                        
+                        String vehicle_data = "{";
+                        vehicle_data = vehicle_data + "\"name\" : \"" + rs.getString("CompanyID") + "\",";
+                        vehicle_data = vehicle_data + "\"lon\" : \"" + rs.getString("Longitude") + "\",";
+                        vehicle_data = vehicle_data + "\"xCompanyName\" : \"" + rs.getString("CompanyID") + "\",";
+                        vehicle_data = vehicle_data + "\"xSoxe\" : \"" + rs.getString("VehiclePlate") + "\",";
+                        vehicle_data = vehicle_data + "\"status\" : \"" + rs.getString("State") + "\",";
+                        vehicle_data = vehicle_data + "\"xBienso\" : \"" + rs.getString("VehiclePlate") + "\",";
+                        vehicle_data = vehicle_data + "\"xCompany\" : \"" + rs.getString("CompanyID") + "\",";
+                        vehicle_data = vehicle_data + "\"time\" : \"" + rs.getString("LastUpdateTime") + "\",";
+                        vehicle_data = vehicle_data + "\"tocdo\" : \"" + rs.getString("Speed") + "\",";
+                        vehicle_data = vehicle_data + "\"lat\" : \"" + rs.getString("Latitude") + "\",";
+                        vehicle_data = vehicle_data + "\"huong\" : \"" + rs.getString("CompanyID") + "\"";
+                        vehicle_data = vehicle_data + "},";
+                        result = result + vehicle_data;
+                    }
+
+                    result = result.substring(0, result.length() - 1) + "]}";
+                    
+                    //STEP 6: Clean-up environment
+                    rs.close();
+                    stmt.close();
+                    conn.close();
+                    break;
+                } catch (Exception ex) {
+                    Logger.getLogger(CommonLibForServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        }
+        return result;
+    }
+
     public static void getdata(String state) {
         switch (state) {
             case "start":
@@ -103,7 +165,8 @@ public class CommonLibForServlet {
                         BAVehicle mResult = getVehicleInfoByCompanyID(Parameters.COMPANY_ID, Parameters.key);
                         putDataToLocalDBMS(Parameters.DATABASE_TYPE, String.valueOf(Parameters.COMPANY_ID), mResult);
 
-                        Thread.sleep(60 * 10 * 1000);
+                        Thread.sleep(60 * 10 * 1000); // update 1 houw
+
                     } catch (InterruptedException ex) {
                         Logger.getLogger(CommonLibForServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -184,4 +247,5 @@ public class CommonLibForServlet {
         vn.com.binhanh.gps.BinhAnhSoap port = service.getBinhAnhSoap12();
         return port.getVehicleInfoByCompanyID(companyID, key);
     }
+
 }

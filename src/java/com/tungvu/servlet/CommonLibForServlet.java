@@ -5,7 +5,11 @@
  */
 package com.tungvu.servlet;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
+import com.tungvu.geo.GeoPoint;
+import static com.tungvu.geo.Geometry.get_line_intersection;
 import com.tungvu.libs.Parameters;
+import com.tungvu.libs.VehicleTracking;
 import java.io.BufferedReader;
 
 import java.io.InputStream;
@@ -16,6 +20,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import vn.com.binhanh.gps.*;
@@ -103,7 +109,7 @@ public class CommonLibForServlet {
                     // Cấu trúc URL Connection dành cho MySQL                    
                     String connectionURL = "jdbc:mysql://" + Parameters.DATABASE_SERVER_IP_ADDRESS
                             + ":" + Parameters.DATABASE_SERVER_PORT + "/"
-                            + Parameters.DATABASE_NAME;
+                            + Parameters.DATABASE_NAME + "?useUnicode=true&characterEncoding=utf-8";
 
                     // Mở kết nối
                     Connection conn = DriverManager.getConnection(connectionURL,
@@ -117,7 +123,7 @@ public class CommonLibForServlet {
 
                     //STEP 5: Extract data from result set
                     while (rs.next()) {
-                        
+
                         String vehicle_data = "{";
                         vehicle_data = vehicle_data + "\"name\" : \"" + rs.getString("CompanyID") + "\",";
                         vehicle_data = vehicle_data + "\"lon\" : \"" + rs.getString("Longitude") + "\",";
@@ -129,13 +135,127 @@ public class CommonLibForServlet {
                         vehicle_data = vehicle_data + "\"time\" : \"" + rs.getString("LastUpdateTime") + "\",";
                         vehicle_data = vehicle_data + "\"tocdo\" : \"" + rs.getString("Speed") + "\",";
                         vehicle_data = vehicle_data + "\"lat\" : \"" + rs.getString("Latitude") + "\",";
-                        vehicle_data = vehicle_data + "\"huong\" : \"" + rs.getString("CompanyID") + "\"";
+                        vehicle_data = vehicle_data + "\"huong\" : \"" + rs.getString("Direction") + "\",";
+                        vehicle_data = vehicle_data + "\"address\" : \"" + rs.getString("Address") + "\"";
                         vehicle_data = vehicle_data + "},";
                         result = result + vehicle_data;
                     }
 
                     result = result.substring(0, result.length() - 1) + "]}";
-                    
+
+                    //STEP 6: Clean-up environment
+                    rs.close();
+                    stmt.close();
+                    conn.close();
+                    break;
+                } catch (Exception ex) {
+                    Logger.getLogger(CommonLibForServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        }
+        return result;
+    }
+
+    public static String query002(String connectType, String startTime, String endTime,
+            String companyID, String streetID) {
+        String result = "{\"data\": [";
+        GeoPoint startPoint = null, endPoint = null;
+        switch (connectType) {
+            case "oracle":
+                break;
+            case "mssql":
+                break;
+            case "mysql": {
+                try {
+                    // Khai báo class Driver cho DB MySQL                    
+                    Class.forName("com.mysql.jdbc.Driver");
+                    // Cấu trúc URL Connection dành cho MySQL                    
+                    String connectionURL = "jdbc:mysql://" + Parameters.DATABASE_SERVER_IP_ADDRESS
+                            + ":" + Parameters.DATABASE_SERVER_PORT + "/"
+                            + Parameters.DATABASE_NAME + "?useUnicode=true&characterEncoding=utf-8";
+
+                    // Mở kết nối
+                    Connection conn = DriverManager.getConnection(connectionURL,
+                            Parameters.DATABASE_USERNAME, Parameters.DATABASE_PASSWORD);
+
+                    // Truy vấn
+                    Statement stmt = conn.createStatement();
+                    String company = companyID;
+                    String sql = "SELECT * FROM vehicle_tracking "
+                            + "WHERE (CompanyID=" + company + ") "
+                            + "and (Cast(LocalTime as UNSIGNED) > Cast(\'" + startTime + "\' as UNSIGNED)) "
+                            + "and (Cast(LocalTime as UNSIGNED) < Cast(\'" + endTime + "\' as UNSIGNED)) "
+                            + "ORDER BY VehiclePlate ";
+                    ResultSet rs = stmt.executeQuery(sql);
+                    List<VehicleTracking> mRawResult = new ArrayList<VehicleTracking>();
+
+                    while (rs.next()) {
+                        VehicleTracking mTrack = new VehicleTracking();
+                        mTrack.setAddress(rs.getString("Address"));
+                        mTrack.setCompanyID(rs.getString("CompanyID"));
+                        mTrack.setDirection(rs.getString("Direction"));
+                        mTrack.setLatitude(rs.getString("Latitude"));
+                        mTrack.setLocalTime(rs.getString("LocalTime"));
+                        mTrack.setLongtitude(rs.getString("Longitude"));
+                        mTrack.setSpeed(rs.getString("Speed"));
+                        mTrack.setState(rs.getString("State"));
+                        mTrack.setUTCTime(rs.getString("UTCTime"));
+                        mTrack.setVehiclePlate(rs.getString("VehiclePlate"));
+                        mRawResult.add(mTrack);
+                    }
+
+                    if (mRawResult.size() > 0) {
+                        streetID = "1";
+                        if (streetID.endsWith("1")) {
+//                            // hoang quoc viet
+//                            startPoint = new GeoPoint(21.020236, 105.807178);
+//                            endPoint = new GeoPoint(21.019204, 105.809779);
+
+                            // dong nai
+                            startPoint = new GeoPoint(10.950268, 107.087615);
+                            endPoint = new GeoPoint(10.933411, 107.080469);
+                        }
+
+                        String vehicle = mRawResult.get(0).getVehiclePlate();
+                        List<GeoPoint> vehicle_location = new ArrayList<GeoPoint>();
+                        vehicle_location.add(new GeoPoint(Double.parseDouble(mRawResult.get(0).getLatitude()),
+                                Double.parseDouble(mRawResult.get(0).getLongtitude())));
+                        String vehicle_data = "{";
+
+                        for (int i = 0; i < mRawResult.size() - 1; i++) {
+                            if (vehicle.equals(mRawResult.get(i + 1).getVehiclePlate())) {
+                                vehicle_location.add(new GeoPoint(Double.parseDouble(mRawResult.get(i + 1).getLatitude()),
+                                        Double.parseDouble(mRawResult.get(i + 1).getLongtitude())));
+
+                            } else {
+                                if ((get_line_intersection(vehicle_location, startPoint, endPoint)) == 1) {
+                                    // add return String                                    
+                                    vehicle_data = vehicle_data + "\"name\" : \"" + mRawResult.get(i).getCompanyID() + "\",";
+                                    vehicle_data = vehicle_data + "\"lon\" : \"" + mRawResult.get(i).getLongtitude() + "\",";
+                                    vehicle_data = vehicle_data + "\"xCompanyName\" : \"" + mRawResult.get(i).getCompanyID() + "\",";
+                                    vehicle_data = vehicle_data + "\"xSoxe\" : \"" + mRawResult.get(i).getVehiclePlate() + "\",";
+                                    vehicle_data = vehicle_data + "\"status\" : \"" + mRawResult.get(i).getState() + "\",";
+                                    vehicle_data = vehicle_data + "\"xBienso\" : \"" + mRawResult.get(i).getVehiclePlate() + "\",";
+                                    vehicle_data = vehicle_data + "\"xCompany\" : \"" + mRawResult.get(i).getCompanyID() + "\",";
+                                    vehicle_data = vehicle_data + "\"time\" : \"" + mRawResult.get(i).getLocalTime() + "\",";
+                                    vehicle_data = vehicle_data + "\"tocdo\" : \"" + mRawResult.get(i).getSpeed() + "\",";
+                                    vehicle_data = vehicle_data + "\"lat\" : \"" + mRawResult.get(i).getLatitude() + "\",";
+                                    vehicle_data = vehicle_data + "\"huong\" : \"" + mRawResult.get(i).getDirection() + "\",";
+                                    vehicle_data = vehicle_data + "\"address\" : \"" + mRawResult.get(i).getAddress() + "\"";
+                                    vehicle_data = vehicle_data + "},";
+                                    result = result + vehicle_data;
+                                }
+
+                                // reset
+                                vehicle_location.clear();
+                                vehicle_location.add(new GeoPoint(Double.parseDouble(mRawResult.get(i + 1).getLatitude()),
+                                        Double.parseDouble(mRawResult.get(i + 1).getLongtitude())));
+                            }
+                        }
+                    }
+                    result = result.substring(0, result.length() - 1) + "]}";
+
                     //STEP 6: Clean-up environment
                     rs.close();
                     stmt.close();
@@ -165,10 +285,11 @@ public class CommonLibForServlet {
                         BAVehicle mResult = getVehicleInfoByCompanyID(Parameters.COMPANY_ID, Parameters.key);
                         putDataToLocalDBMS(Parameters.DATABASE_TYPE, String.valueOf(Parameters.COMPANY_ID), mResult);
 
-                        Thread.sleep(60 * 10 * 1000); // update 1 houw
+                        Thread.sleep(10 * 60 * 1000); // update 10 mins
 
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(CommonLibForServlet.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(CommonLibForServlet.class
+                                .getName()).log(Level.SEVERE, null, ex);
                     }
                 }
 
@@ -192,7 +313,7 @@ public class CommonLibForServlet {
                     // Cấu trúc URL Connection dành cho MySQL                    
                     String connectionURL = "jdbc:mysql://" + Parameters.DATABASE_SERVER_IP_ADDRESS
                             + ":" + Parameters.DATABASE_SERVER_PORT + "/"
-                            + Parameters.DATABASE_NAME;
+                            + Parameters.DATABASE_NAME + "?useUnicode=true&characterEncoding=utf-8";
 
                     // Mở kết nối
                     Connection conn = DriverManager.getConnection(connectionURL,
@@ -222,7 +343,7 @@ public class CommonLibForServlet {
                                 + "\',Speed=\'" + mVehicle.getSpeed()
                                 + "\',state=\'" + mVehicle.getState()
                                 + "\',Direction=\'" + mVehicle.getDirection()
-                                + "\',Address=\'" + mVehicle.getAddress()
+                                + "\',Address=\'" + mVehicle.getAddress().replaceAll("\'", "")
                                 + "\' where VehiclePlate=\'" + mVehicle.getVehiclePlate()
                                 + "\';";
                         sql_02 = sql_02 + temp;
@@ -233,8 +354,10 @@ public class CommonLibForServlet {
                     stmt.close();
                     conn.close();
                     break;
+
                 } catch (Exception ex) {
-                    Logger.getLogger(CommonLibForServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CommonLibForServlet.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
 

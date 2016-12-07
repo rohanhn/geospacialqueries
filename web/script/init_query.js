@@ -228,23 +228,23 @@ function query001() {
                 var AtmAdress = obj[i].xLaixeHoten;
                 var d = Distance(TempLat, TempLon, TempLatAtm,
                         TempLonAtm);
-                var checkSts = true;                
+                var checkSts = true;
                 // kiem tra khoang cach thoa man dieu kien
                 if ((d <= distance) && (checkSts)) {
                     // alert(d);
                     txtResult = txtResult + "<tr bgcolor=\"#8fbafa\">";
                     txtResult = txtResult + "<td style=\"width:55%\">"
-                            + obj[i].xBienso + "-"
-                            + obj[i].xCompanyName + "</td>";
+                            + obj[i].xCompanyName + "-"
+                            + obj[i].xBienso + "</td>";
                     txtResult = txtResult
                             + "<td style=\"width:30% ;text-align: right\">"
                             + d.toFixed(3) + " m" + "</td>";
                     txtResult = txtResult
-                            + "<td style=\"width:15%\"><img src=\"/images/btn.png\" style=\"width:30px; padding:5px \" onclick=\"GetDirection("
+                            + "<td style=\"width:15%\"><img src=\"./images/btn.png\" style=\"width:30px; padding:5px \" onclick=\"GetDirection("
                             + TempLat + "," + TempLon + ","
                             + TempLatAtm + "," + TempLonAtm + ")\"/>";
                     txtResult = txtResult + "</td></tr>";
-                    bankAdd = obj[i].xBienso + "-" + obj[i].xCompanyName;
+                    bankAdd = obj[i].xBienso + "-" + obj[i].address;
                     createMarker2(TempLatAtm, TempLonAtm, bankAdd);
                     checkSts = false;
                 }
@@ -271,7 +271,9 @@ function query002() {
     // get input
     var street_name = document.getElementById("street").value;
     var start_time = document.getElementById("starttime").value;
+    start_time = start_time.replace(" ", "").replace("-", "").replace("-", "").replace(":", "").replace(":", "");
     var end_time = document.getElementById("endtime").value;
+    end_time = end_time.replace(" ", "").replace("-", "").replace("-", "").replace(":", "").replace(":", "");
 
     map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
     var resettxtResult = document.getElementById("resultBox").innerHTML;
@@ -280,7 +282,8 @@ function query002() {
 
     if (true) {
         // truy van tu Secondo        
-        var response = requestHTML("/GeoSpacialQuerries/getalls");
+        var response = requestHTML("/GeoSpacialQuerries/query002?starttime=" 
+                + start_time + "&&endtime=" + end_time + "&&street=" + street_name);
         var report_data = convertResponseDataToObj(response);
         var txtResult = document.getElementById("resultBox").innerHTML;
         txtResult = txtResult + "<table style=\"width:100%\">";

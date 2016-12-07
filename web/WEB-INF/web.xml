@@ -11,6 +11,18 @@
     <servlet>
         <servlet-name>Query002</servlet-name>
         <servlet-class>com.tungvu.servlet.Query002</servlet-class>
+        <init-param>
+            <param-name>starttime</param-name>
+            <param-value>value</param-value>
+        </init-param>
+        <init-param>
+            <param-name>endtime</param-name>
+            <param-value>value</param-value>
+        </init-param>
+        <init-param>
+            <param-name>street</param-name>
+            <param-value>value</param-value>
+        </init-param>
     </servlet>
     <servlet>
         <servlet-name>Query003</servlet-name>

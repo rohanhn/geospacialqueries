@@ -5,6 +5,7 @@
  */
 package com.tungvu.servlet;
 
+import com.tungvu.libs.Parameters;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -29,18 +30,21 @@ public class Query002 extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // 
+        String starttime = request.getParameter("starttime");
+        String endtime = request.getParameter("endtime");
+        String street = request.getParameter("street");
+
+        String dataResponse = CommonLibForServlet.query002(Parameters.DATABASE_TYPE, 
+                starttime, endtime, "3197", street);
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Querry002</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Querry002 at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            if (dataResponse.length() > 0) {
+                out.println(dataResponse);
+            } else {
+                out.println("no data");
+            }
         }
     }
 

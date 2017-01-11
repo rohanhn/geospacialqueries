@@ -282,7 +282,7 @@ function query002() {
 
     if (true) {
         // truy van tu Secondo        
-        var response = requestHTML("/GeoSpacialQuerries/query002?starttime=" 
+        var response = requestHTML("/GeoSpacialQuerries/query002?starttime="
                 + start_time + "&&endtime=" + end_time + "&&street=" + street_name);
         var report_data = convertResponseDataToObj(response);
         var txtResult = document.getElementById("resultBox").innerHTML;
@@ -390,24 +390,22 @@ function query004() {
         // Cap nhat center cua map
         map.setCenter(LatLon);
 
-        // truy van tu Secondo
-        var response = requestHTML("/GeoSpacialQuerries/getalls");
+        // truy van tu Secondo        
+        var response = requestHTML("/GeoSpacialQuerries/query004?nexttime=" + time);
         var report_data = convertResponseDataToObj(response);
         var txtResult = document.getElementById("resultBox").innerHTML;
         txtResult = txtResult + "<table style=\"width:100%\">";
         for (var i = 0; i < report_data.length; i++) {
-            var TempLatAtm = parseFloat(report_data[i].lat);
-            var TempLonAtm = parseFloat(report_data[i].lon);
-            var AtmAdress = report_data[i].xLaixeHoten;
-            var d = Distance(TempLat, TempLon, TempLatAtm, TempLonAtm);
-
+            var TempLatAtm = parseFloat(report_data[i].longtitude);
+            var TempLonAtm = parseFloat(report_data[i].latitute);
+//            var d = Distance(TempLat, TempLon, TempLatAtm, TempLonAtm);
+            // alert(TempLatAtm + " - " + TempLonAtm + " - " + TempLat + " - " + TempLon + " - " + d);
             // kiem tra khoang cach thoa man dieu kien
             if (d <= distance) {
-                // alert(d);
+                alert(d);
                 txtResult = txtResult + "<tr bgcolor=\"#8fbafa\">";
                 txtResult = txtResult + "<td style=\"width:55%\">"
-                        + report_data[i].xBienso + "-"
-                        + report_data[i].xCompanyName + "</td>";
+                        + report_data[i].vehiclePlate + "</td>";
                 txtResult = txtResult
                         + "<td style=\"width:30% ;text-align: right\">"
                         + d.toFixed(3) + " m" + "</td>";
@@ -416,8 +414,8 @@ function query004() {
                         + TempLat + "," + TempLon + "," + TempLatAtm
                         + "," + TempLonAtm + ")\"/>";
                 txtResult = txtResult + "</td></tr>";
-                bankAdd = report_data[i].xBienso + "-"
-                        + report_data[i].xCompanyName;
+                bankAdd = report_data[i].vehiclePlate + "-"
+                        + report_data[i].Time;
                 createMarker2(TempLatAtm, TempLonAtm, bankAdd);
             }
         }

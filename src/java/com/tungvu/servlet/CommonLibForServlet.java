@@ -9,6 +9,7 @@ import com.sun.javafx.scene.control.skin.VirtualFlow;
 import com.tungvu.geo.GeoPoint;
 import static com.tungvu.geo.Geometry.get_line_intersection;
 import com.tungvu.libs.Parameters;
+import com.tungvu.libs.VehicleRoute;
 import com.tungvu.libs.VehicleTracking;
 import java.io.BufferedReader;
 
@@ -256,6 +257,80 @@ public class CommonLibForServlet {
                     }
                     result = result.substring(0, result.length() - 1) + "]}";
 
+                    //STEP 6: Clean-up environment
+                    rs.close();
+                    stmt.close();
+                    conn.close();
+                    break;
+                } catch (Exception ex) {
+                    Logger.getLogger(CommonLibForServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        }
+        return result;
+    }
+
+    public static String query004(String connectType, String startTime, String endTime) {
+        String result = "{\"data\": [";
+        GeoPoint startPoint = null, endPoint = null;
+        switch (connectType) {
+            case "oracle":
+                break;
+            case "mssql":
+                break;
+            case "mysql": {
+                try {
+                    // Khai báo class Driver cho DB MySQL                    
+                    Class.forName("com.mysql.jdbc.Driver");
+                    // Cấu trúc URL Connection dành cho MySQL                    
+                    String connectionURL = "jdbc:mysql://" + Parameters.DATABASE_SERVER_IP_ADDRESS
+                            + ":" + Parameters.DATABASE_SERVER_PORT + "/"
+                            + Parameters.DATABASE_NAME + "?useUnicode=true&characterEncoding=utf-8";
+
+                    // Mở kết nối
+                    Connection conn = DriverManager.getConnection(connectionURL,
+                            Parameters.DATABASE_USERNAME, Parameters.DATABASE_PASSWORD);
+
+                    // Truy vấn
+                    Statement stmt = conn.createStatement();
+
+                    String sql = "SELECT * FROM vehicle_route "
+                            + "WHERE (Cast(Time as TIME) > Cast(\'" + startTime + "\' as TIME)) "
+                            + "and (Cast(Time as TIME) < Cast(\'" + endTime + "\' as TIME)) "
+                            ;
+                    ResultSet rs = stmt.executeQuery(sql);
+                    List<VehicleRoute> mRawResult = new ArrayList<VehicleRoute>();
+
+                    while (rs.next()) {
+                        VehicleRoute mTrack = new VehicleRoute();
+                        mTrack.setRouteID(rs.getString("routeID"));
+                        mTrack.setVehiclePlate(rs.getString("vehiclePlate"));
+                        mTrack.setLat(rs.getString("latitute"));
+                        mTrack.setLon(rs.getString("longtitude"));
+                        mTrack.setTime(rs.getString("Time"));
+                        mRawResult.add(mTrack);
+                    }
+
+                    if (mRawResult.size() > 0) {                       
+
+                        for (int i = 0; i < mRawResult.size() - 1; i++) {
+                            String vehicle_data = "{";
+                            // add return String                                    
+                            vehicle_data = vehicle_data + "\"routeID\" : \"" + mRawResult.get(i).getRouteID() + "\",";
+                            vehicle_data = vehicle_data + "\"vehiclePlate\" : \"" + mRawResult.get(i).getVehiclePlate() + "\",";
+                            vehicle_data = vehicle_data + "\"latitute\" : \"" + mRawResult.get(i).getLat() + "\",";
+                            vehicle_data = vehicle_data + "\"longtitude\" : \"" + mRawResult.get(i).getLon() + "\",";
+                            vehicle_data = vehicle_data + "\"Time\" : \"" + mRawResult.get(i).getTime() + "\"";
+
+                            vehicle_data = vehicle_data + "},";
+                            result = result + vehicle_data;
+                        }
+
+                        result = result.substring(0, result.length() - 1) + "]}";
+                    } else {
+                        result = result + "]}";
+                    }
                     //STEP 6: Clean-up environment
                     rs.close();
                     stmt.close();

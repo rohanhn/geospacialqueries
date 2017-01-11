@@ -31,6 +31,10 @@
     <servlet>
         <servlet-name>Query004</servlet-name>
         <servlet-class>com.tungvu.servlet.Query004</servlet-class>
+        <init-param>
+            <param-name>nextime</param-name>
+            <param-value>value</param-value>
+        </init-param>
     </servlet>
     <servlet>
         <servlet-name>Query005</servlet-name>
